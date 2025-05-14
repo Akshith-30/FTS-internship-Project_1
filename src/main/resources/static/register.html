@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" type="text/css" href="styles/register.css" />
+    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <img src="images/register.jpg" alt="Franqlin E-commerce Logo">
+    <form id="registerForm" method="post" >
+    <input type="text" name="fullName" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="address" placeholder="Address" required>
+        <input type="tel" name="phone" placeholder="Phone" required>
+        <input type="date" name="dob" required>
+
+        <div class="gender">
+            <label>Gender:</label>
+            <label><input type="radio" name="gender" value="male" required> Male</label>
+            <label><input type="radio" name="gender" value="female" required> Female</label>
+            <label><input type="radio" name="gender" value="other" required> Other</label>
+        </div>
+
+        <select name="state" required>
+            <option value="">Select State</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Delhi">Delhi</option>
+        </select>
+
+        <div class="btn-group">
+            <button type="submit" onclick="submitForm()">Register</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+<script src="scripts/register.js"></script>
+
+</body>
+</html>
