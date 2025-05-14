@@ -1,65 +1,112 @@
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            width: 100%;
-            max-width: 350px;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-        }
-        .container img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .container form input, .container form select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 12px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            background-color: #fafafa;
-        }
-        .container form input:focus, .container form select:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-        .container form .gender {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-        .container form .gender label {
-            margin-right: 10px;
-        }
-        .container form .btn-group {
-            display: flex;
-            gap: 10px;
-        }
-        .container form .btn-group input {
-            flex: 1;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .container form .btn-group input:hover {
-            background-color: #0056b3;
-        }
-        .container form .btn-group input[type="reset"] {
-            background-color: #dc3545;
-        }
-        .container form .btn-group input[type="reset"]:hover {
-            background-color: #c82333;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(images/cart.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.reg-form {
+    background: rgba(43, 25, 25, 0.15);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    padding: 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(25px);
+    text-align: center;
+    color: white;
+    width: 400px;
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.15);
+}
+
+.input-box {
+    margin: 20px 0;
+    position: relative;
+}
+
+.input-box input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    padding: 12px 12px 12px 45px;
+    border-radius: 99px;
+    outline: 3px solid transparent;
+    transition: 0.3s;
+    font-size: 17px;
+    color: white;
+    font-weight: 600;
+}
+
+.input-box input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.input-box input:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.reset-btn,
+.reg-btn {
+    width: 35%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 99px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.reset-btn {
+    background-color: rgba(221, 22, 22, 0.714);
+}
+
+.reg-btn {
+    background-color: rgba(0, 94, 255, 0.71);
+}
+
+select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 12px 12px 12px 45px;
+    border-radius: 99px;
+    outline: 2px solid rgba(255, 255, 255, 0.3);
+    transition: 0.3s;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    appearance: none;
+    cursor: pointer;
+}
+
+select option{
+    color: black;
+}
+
+
+.register a {
+    color: rgb(0, 102, 255);
+    text-decoration: none;
+}
+
+.input-box select,
+.input-box input[type="date"] {
+    color: white;
+}
+
