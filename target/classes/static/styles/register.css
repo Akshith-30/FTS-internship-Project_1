@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
     margin: 0;
@@ -24,7 +24,7 @@ body {
     border-radius: 16px;
     backdrop-filter: blur(25px);
     text-align: center;
-    color: white;
+    color: #d1d1d1;
     width: 400px;
     box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.15);
 }
@@ -32,14 +32,19 @@ body {
 .input-box {
     margin: 20px 0;
     position: relative;
+    outline: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.input-box input {
+.input-box input,
+.input-box select,
+.input-box input[type="date"] {
     width: 100%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
     border: none;
     padding: 12px 12px 12px 45px;
-    border-radius: 99px;
+    border-radius: 8px;
     outline: 3px solid transparent;
     transition: 0.3s;
     font-size: 17px;
@@ -57,42 +62,12 @@ body {
     outline: 3px solid rgba(255, 255, 255, 0.3);
 }
 
-.reset-btn,
-.reg-btn {
-    width: 35%;
-    padding: 10px 0;
-    border: none;
-    border-radius: 99px;
-    color: #787878;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.reset-btn {
-    background-color: #1c1c1c;
-}
-
-.reg-btn {
-    background-color: #1c1c1c;
-}
-.reg-btn:hover {
-    background-color: #000000;
-}
-
-.reset-btn:hover {
-    background-color: #000000;
-}
-
 select {
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
     border: none;
     padding: 12px 12px 12px 45px;
-    border-radius: 99px;
+    border-radius: 8px;
     outline: 2px solid rgba(255, 255, 255, 0.3);
     transition: 0.3s;
     font-size: 17px;
@@ -101,19 +76,54 @@ select {
     appearance: none;
     cursor: pointer;
 }
-
-select option{
+select option {
     color: black;
 }
 
-
-.register a {
-    color: rgb(0, 102, 255);
-    text-decoration: none;
-}
-
-.input-box select,
 .input-box input[type="date"] {
     color: white;
 }
 
+/* Button container to place reset and register side-by-side */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.reset-btn,
+.reg-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1c1c1c;
+    color: #787878;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    width :160px;
+}
+
+.reg-btn:hover,
+.reset-btn:hover {
+    background-color: #000000;
+    transform: scale(1.05);
+}
+
+.reset-btn,
+.reg-btn {
+    transition: all 0.3s ease;
+}
+.register a {
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.register a:hover {
+    text-decoration: underline;
+    text-decoration-color: black;
+}
