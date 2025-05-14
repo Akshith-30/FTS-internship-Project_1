@@ -79,6 +79,13 @@ body {
 .reg-btn {
     background-color: #1c1c1c;
 }
+.reg-btn:hover {
+    background-color: #000000;
+}
+
+.reset-btn:hover {
+    background-color: #000000;
+}
 
 select {
     width: 100%;
