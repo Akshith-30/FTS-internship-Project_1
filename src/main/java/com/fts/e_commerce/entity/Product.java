@@ -6,29 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
-
 @Entity
-@Table(name = "t_ecom_users")
+@Table(name = "t_e_com_products")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity {
-
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fullName;
-    private String email;
-    private String password;
-    private String address;
-    private String phone;
-    private Date dob;
-    private String gender;
-    private String state;
+    private String name;
+    private String description;
+    private Double price;
+    private Integer stock;
+
+
 }
+
+
 
