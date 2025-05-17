@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "t_e_com_products")
+@Table(name = "t_ecom_products")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -24,6 +24,3 @@ public class Product {
 
 
 }
-
-
-

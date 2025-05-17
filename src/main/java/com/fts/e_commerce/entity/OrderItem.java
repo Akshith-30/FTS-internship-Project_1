@@ -1,3 +1,4 @@
+
 package com.fts.e_commerce.entity;
 
 import jakarta.persistence.*;
@@ -9,7 +10,7 @@ import lombok.Setter;
 
 public class OrderItem {
     @Entity
-    @Table(name = "t_e_com_order_items")
+    @Table(name = "t_ecom_order_items")
     @Setter
     @Getter
     @AllArgsConstructor

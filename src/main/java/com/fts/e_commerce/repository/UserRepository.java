@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity,Long> {
 
 
-    @Query(value = "SELECT * FROM build_app.t_e_com_users WHERE full_name like CONCAT('%', :searchString, '%')", nativeQuery = true)
+    @Query(value = "SELECT * FROM build_app.t_ecom_users WHERE full_name like CONCAT('%', :searchString, '%')", nativeQuery = true)
     List<UserEntity> searchUserDetails(@Param("searchString") String searchString);
 
 }

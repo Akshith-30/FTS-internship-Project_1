@@ -12,7 +12,7 @@ import java.util.List;
 public class Orders {
 
     @Entity
-    @Table(name = "t_e_com_orders")
+    @Table(name = "t_ecom_orders")
     @Setter
     @Getter
     @AllArgsConstructor
