@@ -1,6 +1,6 @@
 package com.fts.e_commerce.controller;
 
-//import com.fts.e_commerce.entity.Product;
+import com.fts.e_commerce.entity.Product;
 import com.fts.e_commerce.entity.UserEntity;
 import com.fts.e_commerce.service.EcommerceService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +19,7 @@ public class EcommerceController {
 
     private final EcommerceService ecommerceService;
 
+    // User APIs
 
     @PostMapping("/register-user")
     public ResponseEntity<String> registerUserDetails(@RequestBody UserEntity userEntity) throws Exception {
@@ -49,23 +50,23 @@ public class EcommerceController {
         }
     }
 
-//    @PostMapping("/product")
-//    public ResponseEntity<String> saveProduct(@RequestBody Product product) {
-//        ecommerceService.saveProduct(product);
-//        return ResponseEntity.status(HttpStatus.CREATED).body("Product saved successfully.");
-//    }
-//
-//    @PutMapping("/product/{id}")
-//    public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
-//        ecommerceService.updateProduct(id, updatedProduct);
-//        return ResponseEntity.ok("Product updated successfully.");
-//    }
-//
-//    @DeleteMapping("/product/{id}")
-//    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
-//        ecommerceService.deleteProduct(id);
-//        return ResponseEntity.ok("Product deleted successfully.");
-//    }
+    // Product APIs
 
+    @PostMapping("/product")
+    public ResponseEntity<String> saveProduct(@RequestBody Product product) {
+        ecommerceService.saveProduct(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Product saved successfully.");
+    }
 
+    @PutMapping("/product/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
+        ecommerceService.updateProduct(id, updatedProduct);
+        return ResponseEntity.ok("Product updated successfully.");
+    }
+
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        ecommerceService.deleteProduct(id);
+        return ResponseEntity.ok("Product deleted successfully.");
+    }
 }
