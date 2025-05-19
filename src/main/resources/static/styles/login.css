@@ -106,9 +106,8 @@ body {
 .remember-forgot-box a:hover {
     text-decoration: underline;
 }
-
 .login-btn {
-    width: 100%;
+    width: 160px;
     padding: 10px 0;
     background: #1c1c1c;
     border: none;
@@ -117,10 +116,14 @@ body {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
+/* Hover effect */
 .login-btn:hover {
+    transform: scale(1.05);
+    text-decoration-color: black;
+    text-underline-offset: 4px;
     background: #000000;
 }
 
