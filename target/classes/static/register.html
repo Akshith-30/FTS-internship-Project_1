@@ -2,52 +2,43 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
     <link rel="stylesheet" type="text/css" href="styles/register.css" />
-    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+    <script src="scripts/register.js"></script>
 </head>
 
 <body style="
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-image: url('images/bg3.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    ">
-<!-- NAVIGATION BAR -->
-<nav>
-    <a href="index.html" class="logo">Franqlin</a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="">Products</a>
-        <a href="login.html">Login</a>
-        <a href="register.html">Register</a>
-    </div>
-</nav>
-
-<!-- Registration Form -->
-<div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('images/bg3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+">
     <form class="reg-form">
         <h1 class="reg-title">Registration Form</h1>
 
         <div class="input-box">
             <input type="text" placeholder="Full Name" name="fullName" required />
             <span class="error-message" style="color:red; font-size:0.9em;"></span>
+
         </div>
 
         <div class="input-box">
             <input type="email" placeholder="Email" name="email" required />
             <span class="error-message" style="color:red; font-size:0.9em;"></span>
+
         </div>
 
         <div class="input-box">
             <input type="password" placeholder="Password" name="password" required />
             <span class="error-message" style="color:red; font-size:0.9em;"></span>
+
         </div>
 
         <div class="input-box">
@@ -68,41 +59,34 @@
         <input type="radio" id="other" name="gender" value="other" />Other
         <br /><br />
 
-        <!-- Updated Select inside input-box -->
-        <div class="input-box">
-            <select id="state" name="state" required>
-                <option value="" disabled selected hidden>Select State</option>
-                <option value="andhra_pradesh">Andhra Pradesh</option>
-                <option value="bihar">Bihar</option>
-                <option value="delhi">Delhi</option>
-                <option value="gujarat">Gujarat</option>
-                <option value="karnataka">Karnataka</option>
-                <option value="kerala">Kerala</option>
-                <option value="maharashtra">Maharashtra</option>
-                <option value="odisha">Odisha</option>
-                <option value="punjab">Punjab</option>
-                <option value="rajasthan">Rajasthan</option>
-                <option value="tamil_nadu">Tamil Nadu</option>
-                <option value="telangana">Telangana</option>
-                <option value="uttar_pradesh">Uttar Pradesh</option>
-                <option value="west_bengal">West Bengal</option>
-            </select>
-        </div>
+        <select id="state" name="state" required>
+            <option value="">--Select State--</option>
+            <option value="andhra_pradesh">Andhra Pradesh</option>
+            <option value="bihar">Bihar</option>
+            <option value="delhi">Delhi</option>
+            <option value="gujarat">Gujarat</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="kerala">Kerala</option>
+            <option value="maharashtra">Maharashtra</option>
+            <option value="odisha">Odisha</option>
+            <option value="punjab">Punjab</option>
+            <option value="rajasthan">Rajasthan</option>
+            <option value="tamil_nadu">Tamil Nadu</option>
+            <option value="telangana">Telangana</option>
+            <option value="uttar_pradesh">Uttar Pradesh</option>
+            <option value="west_bengal">West Bengal</option>
+        </select><br><br>
 
-        <div class="button-container">
-            <button type="reset" class="reset-btn">Reset</button>
-            <button type="submit" class="reg-btn">Register</button>
-        </div>
+        <button type="reset" class="reset-btn">Reset</button>
+        <button type="submit" class="reg-btn">Register</button>
 
         <p class="register">
             Have an account?
             <a href="login.html">Login</a>
         </p>
     </form>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
-<script src="scripts/register.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+    <script src="scripts/register.js"></script>
 </body>
 
 </html>
