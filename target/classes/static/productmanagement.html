@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product Management</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          padding: 20px;
+        }
+        button {
+          padding: 8px 12px;
+          margin-bottom: 20px;
+          cursor: pointer;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 12px;
+        }
+        th, td {
+          border: 1px solid #ddd;
+          padding: 10px;
+          text-align: left;
+        }
+        th {
+          background-color: #f4f4f4;
+        }
+        .action-btn {
+          background-color: #007bff;
+          border: none;
+          color: white;
+          border-radius: 4px;
+        }
+        .remove-btn {
+          background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<h1>Product Management</h1>
+
+<button id="addProductBtn" class="action-btn">Add Products</button>
+
+<table id="productsTable">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price ($)</th>
+        <th>Stock</th>
+        <th>Remove Product</th>
+        <th>Change Pricing</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Example static row for now -->
+    <tr>
+        <td>Wireless Mouse</td>
+        <td>Ergonomic 2.4GHz wireless mouse</td>
+        <td>25.99</td>
+        <td>150</td>
+        <td><button class="remove-btn action-btn">Remove</button></td>
+        <td><button class="change-price-btn action-btn">Change Price</button></td>
+    </tr>
+    <tr>
+        <td>Bluetooth Headphones</td>
+        <td>Noise-cancelling over-ear headphones</td>
+        <td>79.49</td>
+        <td>80</td>
+        <td><button class="remove-btn action-btn">Remove</button></td>
+        <td><button class="change-price-btn action-btn">Change Price</button></td>
+    </tr>
+    <!-- More rows will be added dynamically when connected to backend -->
+    </tbody>
+</table>
+
+<script>
+    document.getElementById('addProductBtn').addEventListener('click', () => {
+      alert('Add Products form will open here!');
+    });
+
+    // For now, the remove and change price buttons just alert
+    document.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert('Remove product functionality to be implemented.');
+      });
+    });
+
+    document.querySelectorAll('.change-price-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert('Change pricing functionality to be implemented.');
+      });
+    });
+</script>
+</body>
+</html>
