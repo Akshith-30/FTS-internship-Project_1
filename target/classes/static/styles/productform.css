@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+
 * {
     margin: 0;
     padding: 0;
@@ -12,9 +13,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url(images/.jpg);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .reg-form {
@@ -26,7 +27,14 @@ body {
     text-align: center;
     color: #d1d1d1;
     width: 400px;
-    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.15);
+}
+
+.reg-title {
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 28px;
+    color: #d1d1d1;
 }
 
 .input-box {
@@ -52,13 +60,30 @@ body {
     font-weight: 600;
 }
 
-.input-box input::placeholder {
+.input-box textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 17px;
+    resize: vertical;
+    outline: 3px solid transparent;
+    transition: 0.3s;
+    font-family: 'Lexend', sans-serif;
+}
+
+.input-box input::placeholder,
+.input-box textarea::placeholder {
     color: rgba(255, 255, 255, 0.8);
     font-size: 17px;
     font-weight: 500;
 }
 
-.input-box input:focus {
+.input-box input:focus,
+.input-box textarea:focus {
     outline: 3px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -76,6 +101,7 @@ select {
     appearance: none;
     cursor: pointer;
 }
+
 select option {
     color: black;
 }
@@ -105,7 +131,7 @@ select option {
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
-    width :160px;
+    width: 160px;
 }
 
 .reg-btn:hover,
@@ -118,10 +144,28 @@ select option {
 .reg-btn {
     transition: all 0.3s ease;
 }
+
+.error-message {
+    position: absolute;
+    bottom: -18px;
+    left: 15px;
+    font-size: 13px;
+    color: #000000;
+    font-weight: 600;
+}
+
+.register {
+    margin-top: 20px;
+    color: #d1d1d1;
+    font-weight: 500;
+    font-size: 15px;
+}
+
 .register a {
     color: #1a1a1a;
     text-decoration: none;
     transition: all 0.3s ease;
+    font-weight: 700;
 }
 
 .register a:hover {

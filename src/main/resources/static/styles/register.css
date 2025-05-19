@@ -96,6 +96,7 @@ select option {
 .reg-btn {
     flex: 1;
     padding: 12px;
+    margin: 2px;
     border: none;
     border-radius: 8px;
     background-color: #1c1c1c;
