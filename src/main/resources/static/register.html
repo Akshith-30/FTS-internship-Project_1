@@ -20,14 +20,14 @@
       background-repeat: no-repeat;
     ">
 <!-- NAVIGATION BAR -->
-<nav>
+<nav class="navbar">
     <a href="index.html" class="logo">Franqlin</a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="">Products</a>
-        <a href="login.html">Login</a>
-        <a href="register.html">Register</a>
-    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="">Products</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+    </ul>
 </nav>
 
 <!-- Registration Form -->
@@ -58,8 +58,8 @@
             <input type="number" placeholder="Phone number" name="phone" />
         </div>
 
-        <div class="input-box">
-            <input type="date" required name="dob" />
+        <div class="date-box">
+            <input type="date" name="dob" required>
         </div>
 
         <label>Gender</label>

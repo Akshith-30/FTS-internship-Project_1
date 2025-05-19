@@ -74,13 +74,13 @@ body {
 .login-form {
     background: rgba(43, 25, 25, 0.15);
     border: 3px solid rgba(255, 255, 255, 0.3);
-    padding: 50px 60px; /* increased padding */
+    padding: 30px 35px; /* reduced padding */
     border-radius: 16px;
     backdrop-filter: blur(25px);
     text-align: center;
     color: #d1d1d1;
-    width: 550px; /* Wider */
-    min-height: 650px; /* Taller */
+    width: 400px; /* width remains */
+    min-height: 300px; /* reduced min-height */
     box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.15);
     margin: 40px auto;
     display: flex;
@@ -89,13 +89,13 @@ body {
 }
 
 .login-title {
-    font-size: 50px;
+    font-size: 28px; /* smaller font */
     color: #d1d1d1;
-    margin-bottom: 60px;
+    margin-bottom: 25px; /* reduced bottom margin */
 }
 
 .input-box {
-    margin: 30px 0; /* more vertical spacing */
+    margin: 15px 0; /* less vertical spacing */
     position: relative;
 }
 
@@ -103,18 +103,18 @@ body {
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
     border: none;
-    padding: 18px 18px 18px 55px; /* bigger padding */
+    padding: 12px 12px 12px 40px; /* smaller padding */
     border-radius: 99px;
     outline: 3px solid transparent;
     transition: 0.3s;
-    font-size: 18px; /* larger font */
+    font-size: 14px; /* smaller font */
     color: rgb(0, 0, 0);
     font-weight: 600;
 }
 
 .input-box input::placeholder {
     color: #787878;
-    font-size: 18px;
+    font-size: 14px; /* smaller placeholder */
     font-weight: 500;
 }
 
@@ -124,23 +124,23 @@ body {
 
 .input-box i {
     position: absolute;
-    left: 15px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 22px; /* slightly bigger icon */
+    font-size: 16px; /* smaller icon */
     color: rgba(255, 255, 255, 0.8);
 }
 
 .remember-forgot-box {
     display: flex;
     justify-content: space-between;
-    margin: 25px 0; /* a bit more space */
-    font-size: 16px; /* larger text */
+    margin: 10px 0; /* less vertical spacing */
+    font-size: 13px; /* smaller font */
 }
 
 .remember-forgot-box label {
     display: flex;
-    gap: 8px;
+    gap: 5px;
     cursor: pointer;
     color: #787878;
 }
@@ -160,56 +160,46 @@ body {
 }
 
 .login-btn {
-    width: 180px; /* bigger button */
-    padding: 14px 0; /* taller button */
+    width: 130px; /* smaller button */
+    padding: 10px 0; /* smaller button height */
     background: #1c1c1c;
     border: none;
     border-radius: 99px;
     color: #787878;
-    font-size: 18px;
+    font-size: 14px; /* smaller font */
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 12px auto;
 }
 
 .login-btn:hover {
     transform: scale(1.05);
-    text-decoration-color: black;
-    text-underline-offset: 4px;
     background: #000000;
 }
 
 .registerifno {
-    margin-top: 20px;
-    font-size: 16px;
+    margin-top: 12px;
+    font-size: 13px; /* smaller font */
     color: #787878;
 }
 
-.registerifno a {
+.registerifno a,
+.admininst a {
     color: #151515;
-    text-decoration: none;
     font-weight: 500;
+    text-decoration: none;
 }
 
-.registerifno a:hover {
+.registerifno a:hover,
+.admininst a:hover {
     text-decoration: underline;
 }
 
 .admininst {
-    margin-top: 15px;
-    font-size: 16px;
+    margin-top: 8px;
+    font-size: 13px; /* smaller font */
     color: #787878;
-}
-
-.admininst a {
-    color: #151515;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.admininst a:hover {
-    text-decoration: underline;
 }
 
 footer {
