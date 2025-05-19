@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles/adminfeatures.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+<h4 class="landing-text">
+    Welcome to the Admin Dashboard – Manage your store’s products, track orders, and keep everything running smoothly.
+</h4>
+
+<div class="dashboard">
+
+    <div class="admin-card">
+        <div class="card-top">
+            <i data-lucide="package" class="card-icon"></i>
+        </div>
+        <div class="card-content">
+            <h3>Product Management</h3>
+            <p>
+                Manage, add, or edit your products with ease. Keep your inventory up-to-date and showcase the latest
+                items with detailed descriptions and pricing. Organize your catalog to attract more customers and
+                boost sales.
+            </p>
+            <button class="action-btn" onclick="location.href='productmanagement.html'">Manage Products</button>
+        </div>
+    </div>
+
+    <div class="admin-card">
+        <div class="card-top">
+            <i data-lucide="shopping-cart" class="card-icon"></i>
+        </div>
+        <div class="card-content">
+            <h3>Order Management</h3>
+            <p>
+                View and update customer orders promptly. Track shipment status, process returns, and ensure your
+                customers receive timely updates for a smooth shopping experience. Manage order history and generate
+                reports easily.
+            </p>
+            <button class="action-btn">Manage Orders</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    lucide.createIcons();
+</script>
+</body>
+
+</html>
+
