@@ -1,4 +1,4 @@
-/* styles/adminlogin.css */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,6 +6,7 @@
     font-family: 'Lexend', sans-serif;
 }
 
+/* Body and Background */
 body {
     min-height: 100vh;
     display: flex;
@@ -13,6 +14,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
+    background-color: #000; /* Fallback */
 }
 
 .background-img {
@@ -23,8 +25,49 @@ body {
     height: 100%;
     object-fit: cover;
     z-index: -1;
+    filter: brightness(0.5);
 }
 
+/* NAVIGATION BAR */
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    background-color: #1c1c1c;
+    border-bottom: 1px solid #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5em;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #d1d1d1;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #00bfff;
+}
+
+/* Login Form */
 .login-form {
     background: rgba(43, 25, 25, 0.15);
     border: 3px solid rgba(255, 255, 255, 0.3);
@@ -35,14 +78,17 @@ body {
     color: #d1d1d1;
     width: 400px;
     box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 120px; /* space for navbar */
 }
 
+/* Title */
 .login-title {
     font-size: 40px;
     color: #d1d1d1;
     margin-bottom: 40px;
 }
 
+/* Input Box */
 .input-box {
     margin: 20px 0;
     position: relative;
@@ -57,7 +103,7 @@ body {
     outline: 3px solid transparent;
     transition: 0.3s;
     font-size: 17px;
-    color: rgb(0, 0, 0);
+    color: black;
     font-weight: 600;
 }
 
@@ -80,11 +126,13 @@ body {
     color: rgba(255, 255, 255, 0.8);
 }
 
+/* Remember and Forgot */
 .remember-forgot-box {
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
     font-size: 15px;
+    flex-wrap: wrap;
 }
 
 .remember-forgot-box label {
@@ -102,12 +150,14 @@ body {
 .remember-forgot-box a {
     color: #787878;
     text-decoration: none;
+    transition: 0.3s;
 }
 
 .remember-forgot-box a:hover {
     text-decoration: underline;
 }
 
+/* Login Button */
 .login-btn {
     width: 160px;
     padding: 10px 0;
@@ -126,25 +176,40 @@ body {
     background: #000000;
 }
 
-.registerifno {
-    margin-top: 15px;
+/* Register Info */
+.custinst {
+    margin-top: 20px;
     font-size: 15px;
     color: #787878;
 }
 
-.registerifno a {
+.custinst a {
     color: #151515;
     text-decoration: none;
     font-weight: 500;
 }
 
-.registerifno a:hover {
+.custinst a:hover {
     text-decoration: underline;
 }
 
+/* Footer */
 footer {
     margin-top: 30px;
     color: #787878;
     font-size: 13px;
     text-align: center;
+    padding-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-form {
+        width: 90%;
+    }
+
+    .nav-links {
+        gap: 1em;
+        font-size: 14px;
+    }
 }
