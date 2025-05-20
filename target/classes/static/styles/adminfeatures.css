@@ -1,0 +1,93 @@
+/* Import Google Fonts */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.landing-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeSlideDown 1s ease-out forwards;
+}
+
+@keyframes fadeSlideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.admin-card {
+  width: 380px;
+  min-height: 480px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-top {
+  padding: 30px 0;
+  text-align: center;
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.card-content {
+  flex: 1;
+  padding: 25px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.card-content p {
+  font-size: 15px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.action-btn {
+  border: none;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.action-btn:hover {
+}

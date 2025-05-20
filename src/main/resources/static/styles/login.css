@@ -108,7 +108,7 @@ body {
 }
 
 .login-btn {
-    width: 100%;
+    width: 160px;
     padding: 10px 0;
     background: #1c1c1c;
     border: none;
@@ -117,10 +117,14 @@ body {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
+/* Hover effect */
 .login-btn:hover {
+    transform: scale(1.05);
+    text-decoration-color: black;
+    text-underline-offset: 4px;
     background: #000000;
 }
 
@@ -134,9 +138,27 @@ body {
     color: #151515;
     text-decoration: none;
     font-weight: 500;
+    font-size: 15px;
 }
 
 .registerifno a:hover {
+    text-decoration: underline;
+}
+
+.admininst {
+    margin-top: 15px;
+    font-size: 15px;
+    color: #787878;
+}
+
+.admininst a {
+    color: #151515;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.admininst a:hover {
     text-decoration: underline;
 }
 

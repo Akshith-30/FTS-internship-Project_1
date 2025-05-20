@@ -53,20 +53,32 @@ public class EcommerceController {
     // Product APIs
 
     @PostMapping("/product")
-    public ResponseEntity<String> saveProduct(@RequestBody Product product) {
-        ecommerceService.saveProduct(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Product saved successfully.");
+    public ResponseEntity<String> saveProduct(@RequestBody Product product) throws Exception {
+        try {
+            ecommerceService.saveProduct(product);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Product saved successfully.");
+        } catch (Exception e) {
+            throw new Exception("Failed to save product: " + e.getMessage());
+        }
     }
 
     @PutMapping("/product/{id}")
-    public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
-        ecommerceService.updateProduct(id, updatedProduct);
-        return ResponseEntity.ok("Product updated successfully.");
+    public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) throws Exception {
+        try {
+            ecommerceService.updateProduct(id, updatedProduct);
+            return ResponseEntity.ok("Product updated successfully.");
+        } catch (Exception e) {
+            throw new Exception("Failed to update product: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/product/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
-        ecommerceService.deleteProduct(id);
-        return ResponseEntity.ok("Product deleted successfully.");
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) throws Exception {
+        try {
+            ecommerceService.deleteProduct(id);
+            return ResponseEntity.ok("Product deleted successfully.");
+        } catch (Exception e) {
+            throw new Exception("Failed to delete product: " + e.getMessage());
+        }
     }
 }
