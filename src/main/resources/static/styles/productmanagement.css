@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lexend', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    color: #d1d1d1;
+}
+
+.background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+button.action-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #d1d1d1;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    margin-bottom: 25px;
+    width: 180px;
+    text-align: center;
+}
+
+button.action-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+button.remove-btn {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.remove-btn:hover {
+    background-color: #b52a3a;
+}
+
+button.change-price-btn {
+    background-color: #1c1c1c;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.change-price-btn:hover {
+    background-color: #1a1a1a;
+}
+
+table {
+    width: 100%;
+    max-width: 900px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    background: rgba(43, 25, 25, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(25px);
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.15);
+}
+
+thead tr {
+    background: rgba(255, 255, 255, 0.15);
+    color: #d1d1d1;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+tbody tr {
+    background: rgba(255, 255, 255, 0.1);
+    color: #d1d1d1;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+}
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+tbody tr td:last-child,
+tbody tr td:nth-last-child(2) {
+    width: 130px;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    table {
+        max-width: 100%;
+        font-size: 14px;
+    }
+
+    button.action-btn {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}

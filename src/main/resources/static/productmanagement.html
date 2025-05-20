@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product Management</title>
+    <link rel="stylesheet" href="styles/productmanagement.css" />
+</head>
+<body>
+<img src="images/bg3.jpg" alt="Background" class="background-img" />
+
+<h1>Product Management</h1>
+<button id="addProductBtn" class="action-btn">Add Products</button>
+
+<table id="productsTable">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price ($)</th>
+        <th>Stock</th>
+        <th>Remove Product</th>
+        <th>Change Pricing</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Wireless Mouse</td>
+        <td>Ergonomic 2.4GHz wireless mouse</td>
+        <td>25.99</td>
+        <td>150</td>
+        <td><button class="remove-btn action-btn">Remove</button></td>
+        <td><button class="change-price-btn action-btn">Change Price</button></td>
+    </tr>
+    <tr>
+        <td>Bluetooth Headphones</td>
+        <td>Noise-cancelling over-ear headphones</td>
+        <td>79.49</td>
+        <td>80</td>
+        <td><button class="remove-btn action-btn">Remove</button></td>
+        <td><button class="change-price-btn action-btn">Change Price</button></td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="scripts/productmanagement.js"></script>
+
+</body>
+</html>
