@@ -1,3 +1,4 @@
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -5,45 +6,96 @@
     font-family: 'Lexend', sans-serif;
 }
 
+/* Body with padding to avoid fixed navbar overlap */
 body {
     min-height: 100vh;
+    padding-top: 70px; /* height of navbar */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: relative; /* This allows the background image to be styled independently */
+    justify-content: flex-start;
+    position: relative;
+    background-image: url('../images/bg3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #d1d1d1;
+    text-align: center;
 }
 
-.background-img {
-    position: absolute; /* Positions the image relative to the body */
+/* Navbar styles (same as homepage) */
+.navbar {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the whole body */
-    z-index: -1; /* Ensures the image stays behind the content */
+    height: 70px;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-sizing: border-box;
 }
 
+.logo {
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #ffd700;
+}
+
+/* Login form */
 .login-form {
     background: rgba(43, 25, 25, 0.15);
     border: 3px solid rgba(255, 255, 255, 0.3);
-    padding: 30px;
+    padding: 30px 35px; /* reduced padding */
     border-radius: 16px;
     backdrop-filter: blur(25px);
     text-align: center;
     color: #d1d1d1;
-    width: 400px;
+    width: 400px; /* width remains */
+    min-height: 300px; /* reduced min-height */
     box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.15);
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .login-title {
-    font-size: 40px;
+    font-size: 28px; /* smaller font */
     color: #d1d1d1;
-    margin-bottom: 40px;
+    margin-bottom: 25px; /* reduced bottom margin */
 }
 
 .input-box {
-    margin: 20px 0;
+    margin: 15px 0; /* less vertical spacing */
     position: relative;
 }
 
@@ -51,18 +103,18 @@ body {
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
     border: none;
-    padding: 12px 12px 12px 45px;
+    padding: 12px 12px 12px 40px; /* smaller padding */
     border-radius: 99px;
     outline: 3px solid transparent;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 14px; /* smaller font */
     color: rgb(0, 0, 0);
     font-weight: 600;
 }
 
 .input-box input::placeholder {
     color: #787878;
-    font-size: 17px;
+    font-size: 14px; /* smaller placeholder */
     font-weight: 500;
 }
 
@@ -72,23 +124,23 @@ body {
 
 .input-box i {
     position: absolute;
-    left: 15px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 20px;
+    font-size: 16px; /* smaller icon */
     color: rgba(255, 255, 255, 0.8);
 }
 
 .remember-forgot-box {
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
-    font-size: 15px;
+    margin: 10px 0; /* less vertical spacing */
+    font-size: 13px; /* smaller font */
 }
 
 .remember-forgot-box label {
     display: flex;
-    gap: 8px;
+    gap: 5px;
     cursor: pointer;
     color: #787878;
 }
@@ -108,58 +160,46 @@ body {
 }
 
 .login-btn {
-    width: 160px;
-    padding: 10px 0;
+    width: 130px; /* smaller button */
+    padding: 10px 0; /* smaller button height */
     background: #1c1c1c;
     border: none;
     border-radius: 99px;
     color: #787878;
-    font-size: 16px;
+    font-size: 14px; /* smaller font */
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin: 0 auto 12px auto;
 }
 
-/* Hover effect */
 .login-btn:hover {
     transform: scale(1.05);
-    text-decoration-color: black;
-    text-underline-offset: 4px;
     background: #000000;
 }
 
 .registerifno {
-    margin-top: 15px;
-    font-size: 15px;
+    margin-top: 12px;
+    font-size: 13px; /* smaller font */
     color: #787878;
 }
 
-.registerifno a {
+.registerifno a,
+.admininst a {
     color: #151515;
-    text-decoration: none;
     font-weight: 500;
-    font-size: 15px;
+    text-decoration: none;
 }
 
-.registerifno a:hover {
+.registerifno a:hover,
+.admininst a:hover {
     text-decoration: underline;
 }
 
 .admininst {
-    margin-top: 15px;
-    font-size: 15px;
+    margin-top: 8px;
+    font-size: 13px; /* smaller font */
     color: #787878;
-}
-
-.admininst a {
-    color: #151515;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 15px;
-}
-
-.admininst a:hover {
-    text-decoration: underline;
 }
 
 footer {

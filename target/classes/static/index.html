@@ -8,37 +8,41 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
 
-    <!-- Boxicons for icons (optional but included as in reference) -->
+    <!-- Boxicons for icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- External CSS -->
     <link rel="stylesheet" href="styles/index.css" />
 </head>
 <body>
-<center>
-    <div class="header-section">
-        <h1>
-            <img src="images/Franq.png" alt="Franqlin Logo" style="height: 50px; vertical-align: middle; margin-right: 10px;">
-            Franqlin E-Commerce Web Application
-        </h1>
-        <h3>Welcome to our E-Commerce Web Application!</h3>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <a href="index.html" class="logo">Franqlin</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="">Products</a></li>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="sub-section" style="text-align:center;">
+    <h4></h4>
+
+    <img src="images/Franq.png" alt="Franqlin ecommerce banner" class="banner-image"/>
+
+    <div class="button-group">
+        <a href="login.html" class="btn">Login</a>
+        <a href="register.html" class="btn">Register</a>
     </div>
-
-    <div class="sub-section">
-        <h4>We're delighted to have you here! We hope you have a pleasant and enjoyable shopping experience on our website.</h4>
-
-        <img src="images/Franq.png" alt="Franqlin Banner" class="banner-image"/>
-
-        <div>
-            <button id="loginBtn"><a href="login.html">Login</a></button>
-            <button id="registerBtn"><a href="register.html">Register</a></button>
-        </div>
-    </div>
-</center>
+</div>
 
 <footer>
     <p>&copy; 2025 Franqlin Ecommerce App. All rights reserved.</p>
 </footer>
+
 <script src="index.js"></script>
 </body>
 </html>
