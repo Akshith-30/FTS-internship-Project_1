@@ -106,6 +106,7 @@ body {
 .remember-forgot-box a:hover {
     text-decoration: underline;
 }
+
 .login-btn {
     width: 160px;
     padding: 10px 0;
@@ -137,9 +138,27 @@ body {
     color: #151515;
     text-decoration: none;
     font-weight: 500;
+    font-size: 15px;
 }
 
 .registerifno a:hover {
+    text-decoration: underline;
+}
+
+.admininst {
+    margin-top: 15px;
+    font-size: 15px;
+    color: #787878;
+}
+
+.admininst a {
+    color: #151515;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.admininst a:hover {
     text-decoration: underline;
 }
 
