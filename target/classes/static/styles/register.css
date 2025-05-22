@@ -182,7 +182,7 @@ input[type="date"]:valid {
 .reg-btn {
     flex: 1;
     padding: 12px;
-    margin: 2px;
+    margin: 4px;
     border: none;
     border-radius: 999px;
     background-color: #1c1c1c;
@@ -201,7 +201,7 @@ input[type="date"]:valid {
 
 /* === LOGIN LINK === */
 .register a {
-    color: #ffffff;
+    color: #000000;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
