@@ -9,12 +9,12 @@
 /* Body with padding to avoid fixed navbar overlap */
 body {
     min-height: 100vh;
-    padding-top: 70px; /* height of navbar */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center; /* updated from flex-start */
     position: relative;
+    background-color: #000;
     background-image: url('../images/bg3.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -74,47 +74,45 @@ body {
 .login-form {
     background: rgba(43, 25, 25, 0.15);
     border: 3px solid rgba(255, 255, 255, 0.3);
-    padding: 30px 35px; /* reduced padding */
+    padding: 50px;
     border-radius: 16px;
     backdrop-filter: blur(25px);
     text-align: center;
     color: #d1d1d1;
-    width: 400px; /* width remains */
-    min-height: 300px; /* reduced min-height */
+    width: 400px;
     box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.15);
-    margin: 40px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    margin-top: 120px; /* space for navbar */
 }
 
+/* Title */
 .login-title {
-    font-size: 28px; /* smaller font */
+    font-size: 40px;
     color: #d1d1d1;
-    margin-bottom: 25px; /* reduced bottom margin */
+    margin-bottom: 40px;
 }
 
 .input-box {
-    margin: 15px 0; /* less vertical spacing */
+    margin: 15px 0;
     position: relative;
+    width: 100%;
 }
 
 .input-box input {
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
     border: none;
-    padding: 12px 12px 12px 40px; /* smaller padding */
+    padding: 12px 12px 12px 45px;
     border-radius: 99px;
     outline: 3px solid transparent;
     transition: 0.3s;
-    font-size: 14px; /* smaller font */
-    color: rgb(0, 0, 0);
+    font-size: 17px;
+    color: black;
     font-weight: 600;
 }
 
 .input-box input::placeholder {
     color: #787878;
-    font-size: 14px; /* smaller placeholder */
+    font-size: 18px;
     font-weight: 500;
 }
 
@@ -124,23 +122,24 @@ body {
 
 .input-box i {
     position: absolute;
-    left: 10px;
+    left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 16px; /* smaller icon */
+    font-size: 20px;
     color: rgba(255, 255, 255, 0.8);
 }
+
 
 .remember-forgot-box {
     display: flex;
     justify-content: space-between;
-    margin: 10px 0; /* less vertical spacing */
-    font-size: 13px; /* smaller font */
+    margin: 20px 0;
+    font-size: 15px;
+    flex-wrap: wrap;
 }
-
 .remember-forgot-box label {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     cursor: pointer;
     color: #787878;
 }
@@ -160,17 +159,16 @@ body {
 }
 
 .login-btn {
-    width: 130px; /* smaller button */
-    padding: 10px 0; /* smaller button height */
+    width: 170px;
+    padding: 12px 0;
     background: #1c1c1c;
     border: none;
     border-radius: 99px;
     color: #787878;
-    font-size: 14px; /* smaller font */
+    font-size: 17px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin: 0 auto 12px auto;
 }
 
 .login-btn:hover {
@@ -180,7 +178,7 @@ body {
 
 .registerifno {
     margin-top: 12px;
-    font-size: 13px; /* smaller font */
+    font-size: 15px;
     color: #787878;
 }
 
@@ -198,13 +196,25 @@ body {
 
 .admininst {
     margin-top: 8px;
-    font-size: 13px; /* smaller font */
+    font-size: 15px;
     color: #787878;
 }
 
 footer {
     margin-top: 30px;
     color: #787878;
-    font-size: 13px;
+    font-size: 15px;
     text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-form {
+        width: 90%;
+    }
+
+    .nav-links {
+        gap: 1em;
+        font-size: 14px;
+    }
 }
