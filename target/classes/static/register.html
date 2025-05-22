@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="styles/register.css" />
     <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet" />
+
 </head>
 
 <body style="
@@ -64,12 +65,11 @@
             <input type="date" name="dob" required>
         </div>
 
-        <label>Gender</label>
-        <input type="radio" id="male" name="gender" value="male" />Male
-        <input type="radio" id="female" name="gender" value="female" />Female
-        <input type="radio" id="other" name="gender" value="other" />Other
-        <br /><br />
-
+        <div class="radio-box">
+            <label><input type="radio" id="male" name="gender" value="male" /> Male</label>
+            <label><input type="radio" id="female" name="gender" value="female" /> Female</label>
+            <label><input type="radio" id="other" name="gender" value="other" /> Other</label>
+        </div>
         <!-- Updated Select inside input-box -->
         <div class="input-box">
             <select id="state" name="state" required>
