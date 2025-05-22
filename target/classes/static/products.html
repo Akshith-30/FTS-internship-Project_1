@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Products | Franqlin E-commerce</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet" />
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles/products.css" />
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">Franqlin</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div id="product-list"></div>
+
+    <div id="cart-container" title="View Cart">
+        <i class="bx bx-cart"></i>
+        Cart: <span id="cart-count">0</span> items
+    </div>
+
+    <div id="cart-sidebar" class="cart-sidebar-closed" aria-label="Shopping Cart Sidebar" role="region">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-btn" aria-label="Close Cart">&times;</button>
+        </div>
+        <div id="cart-items"></div>
+        <button id="checkout-btn">Proceed to Checkout</button>
+    </div>
+</main>
+
+<script src="scripts/products.js"></script>
+</body>
+</html>
