@@ -30,6 +30,9 @@ public class EcommerceService {
         Optional<UserEntity> user = userRepository.findById(Long.valueOf(id));
         return user.orElse(null);
     }
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 
     public void saveProduct(Product product) {
         productRepository.save(product);

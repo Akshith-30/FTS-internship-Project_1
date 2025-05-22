@@ -6,7 +6,13 @@
     <title>Add Products</title>
     <link rel="stylesheet" type="text/css" href="styles/productform.css" />
     <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
-    <script src="scripts/productform.js" defer></script>
+    <style>
+        /* Optional: Toast position styling (optional if you want it top-center) */
+        #toast-container {
+            top: 20px;
+            right: 20px;
+        }
+    </style>
 </head>
 
 <body style="
@@ -19,37 +25,41 @@
     background-position: center;
     background-repeat: no-repeat;
 ">
-    <form class="reg-form">
-        <h1 class="reg-title">Add a New Product</h1>
+<form class="reg-form">
+    <h1 class="reg-title">Add a New Product</h1>
 
-        <div class="input-box">
-            <input type="text" name="name" placeholder="Product Name" required />
-            <span class="error-message"></span>
-        </div>
+    <div class="input-box">
+        <input type="text" name="name" placeholder="Product Name" required />
+        <span class="error-message"></span>
+    </div>
 
-        <div class="input-box">
-            <textarea name="description" placeholder="Product Description" rows="4" style="width:100%; padding:12px; border-radius: 12px;" required></textarea>
-            <span class="error-message"></span>
-        </div>
+    <div class="input-box">
+        <textarea name="description" placeholder="Product Description" rows="4" style="width:100%; padding:12px; border-radius: 12px;" required></textarea>
+        <span class="error-message"></span>
+    </div>
 
-        <div class="input-box">
-            <input type="number" name="price" placeholder="Price (e.g. 999.99)" step="0.01" min="0" required />
-            <span class="error-message"></span>
-        </div>
+    <div class="input-box">
+        <input type="number" name="price" placeholder="Price (e.g. 999.99)" step="0.01" min="0" required />
+        <span class="error-message"></span>
+    </div>
 
-        <div class="input-box">
-            <input type="number" name="stock" placeholder="Stock Quantity" min="0" required />
-            <span class="error-message"></span>
-        </div>
+    <div class="input-box">
+        <input type="number" name="stock" placeholder="Stock Quantity" min="0" required />
+        <span class="error-message"></span>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; gap: 10px;">
         <button type="reset" class="reset-btn">Reset</button>
         <button type="submit" class="reg-btn">Add Product</button>
+    </div>
 
-        <p class="register">
-            Want to go back?
-            <a href="adminfeatures.html">Admin Login</a>
-        </p>
-    </form>
+    <p class="register">
+        Want to go back?
+        <a href="adminfeatures.html">Admin Login</a>
+    </p>
+</form>
 
-    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+<script src="scripts/productform.js" defer></script>
 </body>
 </html>

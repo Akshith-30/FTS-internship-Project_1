@@ -5,26 +5,61 @@ async function loadProducts() {
         const products = await response.json();
 
         const tbody = document.querySelector('#productsTable tbody');
-        tbody.innerHTML = '';  // Clear existing sample rows
+        tbody.innerHTML = '';
 
         products.forEach(product => {
             const row = document.createElement('tr');
-
             row.innerHTML = `
                 <td>${product.name}</td>
                 <td>${product.description}</td>
-                <td>${product.price.toFixed(2)}</td>
+                <td class="price-cell">${product.price.toFixed(2)}</td>
                 <td>${product.stock}</td>
-                <td><button class="remove-btn action-btn">Remove</button></td>
-                <td><button class="change-price-btn action-btn">Change Price</button></td>
+                <td><button class="remove-btn">Remove</button></td>
+                <td><button class="change-price-btn">Change Price</button></td>
             `;
 
-            row.querySelector('.remove-btn').addEventListener('click', () => {
-                alert(`Remove product "${product.name}" functionality to be implemented.`);
+            // Remove functionality
+            row.querySelector('.remove-btn').addEventListener('click', async () => {
+                if (confirm(`Are you sure you want to remove "${product.name}"?`)) {
+                    try {
+                        const deleteRes = await fetch(`http://localhost:5555/api/product/${product.id}`, {
+                            method: 'DELETE'
+                        });
+
+                        if (!deleteRes.ok) throw new Error('Failed to delete product');
+                        row.remove();
+                    } catch (err) {
+                        alert('Error deleting product');
+                        console.error(err);
+                    }
+                }
             });
 
-            row.querySelector('.change-price-btn').addEventListener('click', () => {
-                alert(`Change price for "${product.name}" functionality to be implemented.`);
+            // Change price functionality
+            row.querySelector('.change-price-btn').addEventListener('click', async () => {
+                const newPrice = prompt(`Enter new price for "${product.name}"`, product.price);
+                if (newPrice !== null && !isNaN(parseFloat(newPrice))) {
+                    try {
+                        const updateRes = await fetch(`http://localhost:5555/api/product/${product.id}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                ...product,
+                                price: parseFloat(newPrice)
+                            })
+                        });
+
+                        if (!updateRes.ok) throw new Error('Failed to update price');
+                        row.querySelector('.price-cell').textContent = parseFloat(newPrice).toFixed(2);
+                    } catch (err) {
+                        alert('Error updating price');
+                        console.error(err);
+                    }
+                } else {
+                    alert('Invalid price input!');
+                }
             });
 
             tbody.appendChild(row);
