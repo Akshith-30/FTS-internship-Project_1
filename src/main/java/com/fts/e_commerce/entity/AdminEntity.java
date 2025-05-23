@@ -1,34 +1,27 @@
 package com.fts.e_commerce.entity;
 
-
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Date;
-
-
-@Entity
-@Table(name = "t_e_com_users")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntityDummy {
+@Entity
+@Table(name = "t_admin")
+public class AdminEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    private String fullName;
-    private String email;
+    @Column(name = "admin_id", nullable = false, unique = true)
+    private String adminId;
+
+    @Column(nullable = false)
     private String password;
-    private String address;
-    private String phone;
-    private Date dob;
-    private String gender;
-    private String state;
+
+    // Getters and Setters
 }
