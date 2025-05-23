@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/login.css">
-    <style>
-        .admininst {
-            font-size: 15px !important;
-            color: grey !important;
-        }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login Page | Franqlin E-commerce</title>
 
-        .admininst a {
-            color: black !important;
-            font-size: 15px !important;
-        }
-    </style>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+    <!-- Boxicons (optional) -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/login.css" />
 </head>
 <body>
-<img class="background-img" src="images/bg3.jpg" alt="Background Image">
 
+<!-- NAVIGATION BAR -->
+<nav class="navbar">
+    <a href="index.html" class="logo">Franqlin</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+    </ul>
+</nav>
+
+<!-- Login Form -->
 <form action="#" class="login-form">
     <h1 class="login-title">Login Page</h1>
 
@@ -29,6 +33,7 @@
         <i class="fa-solid fa-user" style="color: #787878;"></i>
         <input type="text" id="username" placeholder="Username" required>
     </div>
+
     <div class="input-box">
         <i class="fa-solid fa-lock" style="color: #787878;"></i>
         <input type="password" id="password" placeholder="Password" required>
@@ -43,19 +48,23 @@
     </div>
 
     <button class="login-btn">Login</button>
+
     <p class="registerifno">
         Don't have an account?
         <a href="register.html">Register</a>
     </p>
+
     <p class="admininst">
         Are you an admin?
         <a href="adminlogin.html">Admin Login</a>
     </p>
 </form>
 
+<!-- Footer -->
 <footer>
     <p>&copy; 2025 Franqlin Ecommerce App. All rights reserved.</p>
 </footer>
-<script src="login.js"></script>
+
+<script src="scripts/login.js"></script>
 </body>
 </html>

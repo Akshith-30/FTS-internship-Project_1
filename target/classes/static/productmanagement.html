@@ -24,41 +24,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>Wireless Mouse</td>
-        <td>Ergonomic 2.4GHz wireless mouse</td>
-        <td>25.99</td>
-        <td>150</td>
-        <td><button class="remove-btn action-btn">Remove</button></td>
-        <td><button class="change-price-btn action-btn">Change Price</button></td>
-    </tr>
-    <tr>
-        <td>Bluetooth Headphones</td>
-        <td>Noise-cancelling over-ear headphones</td>
-        <td>79.49</td>
-        <td>80</td>
-        <td><button class="remove-btn action-btn">Remove</button></td>
-        <td><button class="change-price-btn action-btn">Change Price</button></td>
-    </tr>
+    <!-- Products will be dynamically injected here by JS -->
     </tbody>
 </table>
 
-<script>
-    document.getElementById('addProductBtn').addEventListener('click', () => {
-        window.location.href = 'productform.html';
-    });
-
-    document.querySelectorAll('.remove-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('Remove product functionality to be implemented.');
-        });
-    });
-
-    document.querySelectorAll('.change-price-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('Change pricing functionality to be implemented.');
-        });
-    });
-</script>
+<script src="scripts/productmanagement.js"></script>
 </body>
 </html>
