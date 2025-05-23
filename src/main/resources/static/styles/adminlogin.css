@@ -101,9 +101,9 @@ nav {
     padding: 12px 12px 12px 45px;
     border-radius: 99px;
     outline: 3px solid transparent;
-    transition: 0.3s;
+    transition: outline 0.3s ease;
     font-size: 17px;
-    color: black;
+    color: white !important; /* always white text */
     font-weight: 600;
 }
 
@@ -115,6 +115,7 @@ nav {
 
 .input-box input:focus {
     outline: 3px solid rgba(255, 255, 255, 0.3);
+    /* color stays white due to !important above */
 }
 
 .input-box i {

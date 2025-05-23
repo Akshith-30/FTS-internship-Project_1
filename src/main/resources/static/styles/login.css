@@ -106,7 +106,7 @@ body {
     outline: 3px solid transparent;
     transition: 0.3s;
     font-size: 17px;
-    color: black;
+    color: white; /* ✅ changed from black to white */
     font-weight: 600;
 }
 
@@ -129,7 +129,6 @@ body {
     color: rgba(255, 255, 255, 0.8);
 }
 
-
 .remember-forgot-box {
     display: flex;
     justify-content: space-between;
@@ -137,6 +136,7 @@ body {
     font-size: 15px;
     flex-wrap: wrap;
 }
+
 .remember-forgot-box label {
     display: flex;
     gap: 8px;
