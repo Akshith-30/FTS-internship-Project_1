@@ -49,6 +49,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .nav-links li {
     list-style: none;
 }
@@ -114,6 +115,7 @@ body {
     font-weight: 500;
     outline: none;
     appearance: none;
+    color: #ffffff !important;
 }
 
 /* === SELECT PLACEHOLDER === */
@@ -128,7 +130,7 @@ body {
 
 /* === SELECTED TEXT COLOR AFTER SELECTION === */
 .input-box select:valid {
-    color: #000;
+    color: #d1d1d1;
 }
 
 /* === Dropdown Placeholder Option === */
@@ -147,6 +149,7 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield;
@@ -162,12 +165,18 @@ input[type="date"] {
     font-size: 17px;
     font-weight: 500;
     appearance: none;
-    color: #6b6b6b;
+    color: #ffffff !important;
 }
 
 /* === DATE SELECTED TEXT COLOR === */
 input[type="date"]:valid {
-    color: #000;
+    color: #d1d1d1;
+}
+
+/* === AUTOFILL FIX === */
+input:-webkit-autofill {
+    -webkit-text-fill-color: #ffffff !important;
+    transition: background-color 9999s ease-out;
 }
 
 /* === BUTTONS === */
