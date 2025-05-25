@@ -76,4 +76,3 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCheckoutCart(products);
   });
 });
-//ahhahahaahah
