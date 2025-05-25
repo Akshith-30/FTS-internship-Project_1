@@ -17,9 +17,12 @@ import java.util.List;
 public class CartService {
     @Autowired
     private CartRepository cartRepository;
-    @Autowired private CartItemRepository cartItemRepository;
-    @Autowired private ProductRepository productRepository;
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private CartItemRepository cartItemRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public void addToCart(Long userId, Long productId) {
         UserEntity user = userRepository.findById(userId).orElseThrow();
@@ -30,21 +33,20 @@ public class CartService {
             newCart.setUser(user);
             return cartRepository.save(newCart);
         });
-
-        CartItem cartItem = cartItemRepository.findByCartAndProduct(cart, product)
-                .orElse(new CartItem());
-        cartItem.setCart(cart);
-        cartItem.setProduct(product);
-        cartItem.setCart(cartItem.getQuantity() + 1);
-
-        cartItemRepository.save(cartItem);
     }
-
-    public List<CartItem> getCartItems(Long userId) {
-        UserEntity user = userRepository.findById(userId).orElseThrow();
-        Cart cart = cartRepository.findByUser(user).orElseThrow();
-        return cart.getItems();
-    }
-
+//        CartItem cartItem = cartItemRepository.findByCartAndProduct(cart, product)
+//                .orElse(new CartItem());
+//        cartItem.setCart(cart);
+//        cartItem.setProduct(product);
+//       // cartItem.setCart(cartItem.getQuantity() + 1);
 //
-}
+//        cartItemRepository.save(cartItem);
+//    }
+//
+//    public List<CartItem> getCartItems(Long userId) {
+//        UserEntity user = userRepository.findById(userId).orElseThrow();
+//        Cart cart = cartRepository.findByUser(user).orElseThrow();
+//        return cart.getItems();
+//    }
+//
+}//
