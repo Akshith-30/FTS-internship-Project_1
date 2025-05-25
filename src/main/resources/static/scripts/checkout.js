@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const postalCode = document.getElementById('postalCode').value.trim();
     const country = document.getElementById('country').value.trim();
 
-    // Simple validation
+
     if (!street || !city || !state || !postalCode || !country) {
       alert('Please fill in all the required fields.');
       return;
