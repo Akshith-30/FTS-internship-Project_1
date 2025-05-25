@@ -35,7 +35,7 @@ public class CartService {
                 .orElse(new CartItem());
         cartItem.setCart(cart);
         cartItem.setProduct(product);
-        cartItem.setCart(cartItem.getQuantity()+1);
+        cartItem.setCart(cartItem.getQuantity() + 1);
 
         cartItemRepository.save(cartItem);
     }
@@ -46,5 +46,5 @@ public class CartService {
         return cart.getItems();
     }
 
-    // Add remove and clear methods as needed
+//
 }
