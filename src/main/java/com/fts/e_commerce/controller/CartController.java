@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -13,18 +14,25 @@ import java.util.Map;
 @RequestMapping("/api/cart")
 public class CartController {
 
-    @Autowired
-    private CartService cartService;
+    @Autowired private CartService cartService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addToCart(@RequestBody Map<String, Long> request) {
-        cartService.addToCart(request.get("userId"), request.get("productId"));
-        return ResponseEntity.ok("Item added");
+    public ResponseEntity<String> addToCart(@RequestBody Map<String, Long> request) {
+        Long userId = request.get("userId");
+        Long productId = request.get("productId");
+
+        cartService.addToCart(userId, productId);
+        return ResponseEntity.ok("Product added to cart");
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<CartItem>> getCart(@RequestParam Long userId) {
-//        return ResponseEntity.ok(cartService.getCartItems(userId));
-//    }
+    @GetMapping
+    public ResponseEntity<List<CartItem>> getCartItems(@RequestParam Long userId) {
+        return ResponseEntity.ok(cartService.getCartItems(userId));
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<BigDecimal> getCartTotal(@RequestParam Long userId) {
+        return ResponseEntity.ok(cartService.getCartTotal(userId));
+    }
 }
-//
+
