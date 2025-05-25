@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Checkout Page</title>
+    <link rel="stylesheet" href="checkout.css" />
+    <script defer src="checkout.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<div class="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+</div>
+
+<div class="main-wrapper">
+    <div class="box left-box">
+        <h2>Delivery Address</h2>
+        <form id="checkoutForm">
+            <label for="country">Country/Region:</label>
+            <input type="text" id="country" name="country" value="United Kingdom" required>
+
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Your 10 or 9 digit phone number" required>
+
+            <label for="postcode">Postcode:</label>
+            <input type="text" id="postcode" name="postcode" placeholder="Enter your area postcode" required>
+
+            <label for="address">Address Line:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="city">Town/City:</label>
+            <input type="text" id="city" name="city" required>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <div class="box right-box">
+        <h2>Order Summary</h2>
+        <div class="cart-items">
+            <div class="item">
+                <p><strong>Product:</strong> Nike Air Max 270</p>
+                <p><strong>Price:</strong> $160.00</p>
+            </div>
+            <div class="item">
+                <p><strong>Product:</strong> Nike Air Max 90</p>
+                <p><strong>Price:</strong> $130.00</p>
+            </div>
+            <div class="item">
+                <p><strong>Product:</strong> Nike Air Cross Trainer 3 Low</p>
+                <p><strong>Price:</strong> $125.00</p>
+            </div>
+        </div>
+        <div class="summary">
+            <p>Total: $415</p>
+            <p>Shipping: $15</p>
+            <p><strong>Total Cost: $430</strong></p>
+        </div>
+        <div class="actions">
+            <button class="checkout-btn">Proceed to Checkout</button>
+            <button class="store-btn">Go to Store</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
