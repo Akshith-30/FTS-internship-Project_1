@@ -1,13 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('checkoutForm');
-  const cartItemsContainer = document.querySelector('.cart-items');
-  const summaryDiv = document.querySelector('.summary');
-
-  let cart = JSON.parse(localStorage.getItem('cart')) || {};
-  let products = [];
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
+  // Form submission handler
+  document.getElementById('checkoutForm').addEventListener('submit', function (e) {
+    e.preventDefault();
 
     const street = document.getElementById('street').value.trim();
     const city = document.getElementById('city').value.trim();
@@ -20,57 +14,65 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    console.log('Checkout Form Submitted:');
+    console.log(`Street: ${street}`);
+    console.log(`City: ${city}`);
+    console.log(`State: ${state}`);
+    console.log(`Postal Code: ${postalCode}`);
+    console.log(`Country: ${country}`);
+
     alert('Form submitted successfully!');
-    form.reset();
+    this.reset();
   });
 
-  // Fetch product data (same logic as in products.js)
+  // Go to Store button
+  document.querySelector('.store-btn').addEventListener('click', () => {
+    window.location.href = 'products.html';
+  });
+
+  // Load cart items from localStorage
+  const cart = JSON.parse(localStorage.getItem('cart')) || {};
+  const cartItemsContainer = document.getElementById('checkoutCartItems');
+  const itemTotalEl = document.getElementById('itemTotal');
+  const totalCostEl = document.getElementById('totalCost');
+  const shippingCost = 15;
+
   async function fetchProducts() {
     try {
       const response = await fetch('/api/products');
       if (!response.ok) throw new Error('Failed to fetch products');
-      products = await response.json();
-      renderOrderSummary();
-    } catch (err) {
-      console.error('Error loading products for checkout:', err);
-      cartItemsContainer.innerHTML = '<p>Failed to load cart items.</p>';
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      return [];
     }
   }
 
-  function renderOrderSummary() {
+  function renderCheckoutCart(products) {
     cartItemsContainer.innerHTML = '';
-    let subtotal = 0;
+    let itemTotal = 0;
 
     Object.entries(cart).forEach(([productId, qty]) => {
       const product = products.find(p => String(p.id) === productId);
       if (!product) return;
 
-      const itemTotal = product.price * qty;
-      subtotal += itemTotal;
-
       const itemDiv = document.createElement('div');
-      itemDiv.classList.add('item');
+      itemDiv.className = 'item';
       itemDiv.innerHTML = `
         <p><strong>Product:</strong> ${product.name}</p>
-        <p><strong>Price:</strong> $${product.price.toFixed(2)} x ${qty} = $${itemTotal.toFixed(2)}</p>
+        <p><strong>Price:</strong> $${product.price.toFixed(2)} x ${qty} = $${(product.price * qty).toFixed(2)}</p>
       `;
       cartItemsContainer.appendChild(itemDiv);
+
+      itemTotal += product.price * qty;
     });
 
-    const shipping = subtotal > 0 ? 15 : 0;
-    const totalCost = subtotal + shipping;
-
-    summaryDiv.innerHTML = `
-      <p>Total: $${subtotal.toFixed(2)}</p>
-      <p>Shipping: $${shipping.toFixed(2)}</p>
-      <p><strong>Total Cost: $${totalCost.toFixed(2)}</strong></p>
-    `;
+    itemTotalEl.textContent = itemTotal.toFixed(2);
+    totalCostEl.textContent = (itemTotal + shippingCost).toFixed(2);
   }
 
-  fetchProducts();
-
-  // Button event to go back to store
-  document.querySelector('.store-btn').addEventListener('click', () => {
-    window.location.href = 'products.html';
+  // Initialize
+  fetchProducts().then(products => {
+    renderCheckoutCart(products);
   });
 });
