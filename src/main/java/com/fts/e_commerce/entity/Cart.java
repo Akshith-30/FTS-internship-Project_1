@@ -23,5 +23,10 @@ public class Cart {
 
     public void setUser(UserEntity user) {
     }
+//
+//    public List<CartItem> getItems() {
+//        return
+//    }
+//
 }
 //

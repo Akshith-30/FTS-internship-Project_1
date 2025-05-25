@@ -18,14 +18,15 @@ public class CartItem {
     private Product product;
 
     private int quantity;
-
-    public void setCart(Cart cart) {
-    }
-
-    public void setProduct(Product product) {
-    }
-
-    public Cart getQuantity() {
-    }
 }
+//
+//    public void setCart(Cart cart) {
+//    }
+//
+//    public void setProduct(Product product) {
+//    }
+//
+//    public Cart getQuantity() {
+//    }
+
 //
