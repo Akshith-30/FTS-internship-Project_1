@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Checkout Page</title>
-    <link rel="stylesheet" href="checkout.css" />
-    <script defer src="checkout.js"></script>
+    <link rel="stylesheet" href="styles/checkout.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
@@ -17,26 +16,20 @@
     <div class="box left-box">
         <h2>Delivery Address</h2>
         <form id="checkoutForm">
-            <label for="country">Country/Region:</label>
-            <input type="text" id="country" name="country" value="United Kingdom" required>
+            <label for="street">Street:</label>
+            <input type="text" id="street" name="street" required>
 
-            <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" name="fullName" required>
-
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" placeholder="Your 10 or 9 digit phone number" required>
-
-            <label for="postcode">Postcode:</label>
-            <input type="text" id="postcode" name="postcode" placeholder="Enter your area postcode" required>
-
-            <label for="address">Address Line:</label>
-            <input type="text" id="address" name="address" required>
-
-            <label for="city">Town/City:</label>
+            <label for="city">City:</label>
             <input type="text" id="city" name="city" required>
+
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
+
+            <label for="postalCode">Postal Code:</label>
+            <input type="text" id="postalCode" name="postalCode" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required>
 
             <button type="submit" class="submit-btn">Submit</button>
         </form>
@@ -44,24 +37,13 @@
 
     <div class="box right-box">
         <h2>Order Summary</h2>
-        <div class="cart-items">
-            <div class="item">
-                <p><strong>Product:</strong> Nike Air Max 270</p>
-                <p><strong>Price:</strong> $160.00</p>
-            </div>
-            <div class="item">
-                <p><strong>Product:</strong> Nike Air Max 90</p>
-                <p><strong>Price:</strong> $130.00</p>
-            </div>
-            <div class="item">
-                <p><strong>Product:</strong> Nike Air Cross Trainer 3 Low</p>
-                <p><strong>Price:</strong> $125.00</p>
-            </div>
+        <div class="cart-items" id="checkoutCartItems">
+            <!-- Dynamic cart items will be inserted here -->
         </div>
-        <div class="summary">
-            <p>Total: $415</p>
-            <p>Shipping: $15</p>
-            <p><strong>Total Cost: $430</strong></p>
+        <div class="summary" id="checkoutSummary">
+            <p>Total: $<span id="itemTotal">0.00</span></p>
+            <p>Shipping: $<span id="shippingCost">15.00</span></p>
+            <p><strong>Total Cost: $<span id="totalCost">0.00</span></strong></p>
         </div>
         <div class="actions">
             <button class="checkout-btn">Proceed to Checkout</button>
@@ -69,5 +51,87 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Form submission handler
+      document.getElementById('checkoutForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const street = document.getElementById('street').value.trim();
+        const city = document.getElementById('city').value.trim();
+        const state = document.getElementById('state').value.trim();
+        const postalCode = document.getElementById('postalCode').value.trim();
+        const country = document.getElementById('country').value.trim();
+
+        if (!street || !city || !state || !postalCode || !country) {
+          alert('Please fill in all the required fields.');
+          return;
+        }
+
+        console.log('Checkout Form Submitted:');
+        console.log(`Street: ${street}`);
+        console.log(`City: ${city}`);
+        console.log(`State: ${state}`);
+        console.log(`Postal Code: ${postalCode}`);
+        console.log(`Country: ${country}`);
+
+        alert('Form submitted successfully!');
+        this.reset();
+      });
+
+      // Go to Store button
+      document.querySelector('.store-btn').addEventListener('click', () => {
+        window.location.href = 'products.html';
+      });
+
+      // Load cart items from localStorage
+      const cart = JSON.parse(localStorage.getItem('cart')) || {};
+      const cartItemsContainer = document.getElementById('checkoutCartItems');
+      const itemTotalEl = document.getElementById('itemTotal');
+      const totalCostEl = document.getElementById('totalCost');
+      const shippingCost = 15;
+
+      async function fetchProducts() {
+        try {
+          const response = await fetch('/api/products');
+          if (!response.ok) throw new Error('Failed to fetch products');
+          return await response.json();
+        } catch (error) {
+          console.error('Error fetching products:', error);
+          return [];
+        }
+      }
+
+      function renderCheckoutCart(products) {
+        cartItemsContainer.innerHTML = '';
+        let itemTotal = 0;
+
+        Object.entries(cart).forEach(([productId, qty]) => {
+          const product = products.find(p => String(p.id) === productId);
+          if (!product) return;
+
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'item';
+          itemDiv.innerHTML = `
+            <p><strong>Product:</strong> ${product.name}</p>
+            <p><strong>Price:</strong> $${product.price.toFixed(2)} x ${qty} = $${(product.price * qty).toFixed(2)}</p>
+          `;
+          cartItemsContainer.appendChild(itemDiv);
+
+          itemTotal += product.price * qty;
+        });
+
+        itemTotalEl.textContent = itemTotal.toFixed(2);
+        totalCostEl.textContent = (itemTotal + shippingCost).toFixed(2);
+      }
+
+      // Initialize
+      fetchProducts().then(products => {
+        renderCheckoutCart(products);
+      });
+    });
+</script>
 </body>
 </html>
+<!--mv-->
