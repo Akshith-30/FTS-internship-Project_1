@@ -172,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Your cart is empty.');
       return;
     }
-    alert('Proceeding to checkout...');
   });
 
   // Add clear cart button functionality here:

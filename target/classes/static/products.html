@@ -39,6 +39,13 @@
             <div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
             <button id="clearCartBtn" class="clear-cart-btn">Clear Cart</button>
             <button id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
+
+            <script>
+                document.getElementById("checkoutBtn").addEventListener("click", function() {
+                  window.location.href = "checkout.html";
+                });
+            </script>
+
         </div>
     </aside>
 </main>
