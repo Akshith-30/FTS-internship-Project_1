@@ -115,12 +115,28 @@ body {
     font-weight: 500;
     outline: none;
     appearance: none;
-    color: #ffffff !important;
+    color: #6b6b6b; /* Default text color */
 }
 
-/* === SELECT PLACEHOLDER === */
+/* === Placeholder Color === */
+.input-box input::placeholder,
+.input-box select option {
+    color: #6b6b6b; /* Grey placeholder */
+}
+
+/* === Input after entry: white === */
+.input-box input:valid,
+.input-box select:valid {
+    color: #ffffff; /* White text for valid input */
+}
+
+/* === SELECT FIELD PLACEHOLDER GREY BY DEFAULT === */
+.input-box select:required:invalid {
+    color: #6b6b6b; /* Grey for invalid select */
+}
+
+/* === Custom Arrow Icon === */
 .input-box select {
-    color: #6b6b6b;
     background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     background-repeat: no-repeat;
     background-position: right 15px center;
@@ -128,19 +144,13 @@ body {
     cursor: pointer;
 }
 
-/* === SELECTED TEXT COLOR AFTER SELECTION === */
-.input-box select:valid {
-    color: #d1d1d1;
-}
-
-/* === Dropdown Placeholder Option === */
-select option[disabled] {
-    color: #d1d1d1;
-}
-
-/* === Dropdown Actual Options === */
+/* === Dropdown Options === */
 select option {
     color: black;
+}
+
+select option[disabled] {
+    color: #d1d1d1;
 }
 
 /* === PHONE NUMBER: REMOVE ARROWS === */
@@ -165,12 +175,13 @@ input[type="date"] {
     font-size: 17px;
     font-weight: 500;
     appearance: none;
-    color: #ffffff !important;
+    color: #6b6b6b; /* Default text color */
 }
 
 /* === DATE SELECTED TEXT COLOR === */
+input[type="date"]:focus,
 input[type="date"]:valid {
-    color: #d1d1d1;
+    color: #ffffff; /* White text for valid date */
 }
 
 /* === AUTOFILL FIX === */
