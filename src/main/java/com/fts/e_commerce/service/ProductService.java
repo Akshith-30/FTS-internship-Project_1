@@ -6,16 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
-
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     public void saveProduct(Product product) {
         productRepository.save(product);
