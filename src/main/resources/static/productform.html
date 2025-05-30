@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Products</title>
     <link rel="stylesheet" type="text/css" href="styles/productform.css" />
-    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
-    <script src="scripts/productform.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet" />
 </head>
 
 <body style="
@@ -19,39 +18,44 @@
     background-position: center;
     background-repeat: no-repeat;
 ">
-    <form class="reg-form">
-        <h1 class="reg-title">Add a New Product</h1>
+<form class="reg-form" enctype="multipart/form-data" novalidate>
+    <h1 class="reg-title">Add a New Product</h1>
 
-        <div class="input-box">
-            <input type="text" name="name" placeholder="Product Name" required />
-            <span class="error-message"></span>
-        </div>
+    <div class="input-box">
+        <input type="text" name="name" placeholder="Product Name" required />
+        <span class="error-message"></span>
+    </div>
 
-        <div class="input-box">
-            <label>
-                <textarea name="description" placeholder="Product Description" rows="4" style="width:100%; padding:12px; border-radius: 12px;" required></textarea>
-            </label>
-            <span class="error-message"></span>
-        </div>
+    <div class="input-box">
+        <textarea name="description" placeholder="Product Description" rows="4" style="width:100%; padding:12px; border-radius: 12px;" required></textarea>
+        <span class="error-message"></span>
+    </div>
 
-        <div class="input-box">
-            <input type="number" name="price" placeholder="Price (e.g. 999.99)" step="0.01" min="0" required />
-            <span class="error-message"></span>
-        </div>
+    <div class="input-box">
+        <input type="number" name="price" placeholder="Price (e.g. 999.99)" step="0.01" min="0" required />
+        <span class="error-message"></span>
+    </div>
 
-        <div class="input-box">
-            <input type="number" name="stock" placeholder="Stock Quantity" min="0" required />
-            <span class="error-message"></span>
-        </div>
-        <button type="reset" class="reset-btn">Reset</button>
-        <button type="submit" class="reg-btn">Add Product</button>
+    <div class="input-box">
+        <input type="number" name="stock" placeholder="Stock Quantity" min="0" required />
+        <span class="error-message"></span>
+    </div>
 
-        <p class="register">
-            Want to go back?
-            <a href="adminfeatures.html">Admin Login</a>
-        </p>
-    </form>
+    <div class="input-box">
+        <input type="file" name="image" accept="image/*" />
+        <span class="error-message"></span>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+    <button type="reset" class="reset-btn">Reset</button>
+    <button type="submit" class="reg-btn">Add Product</button>
+
+    <p class="register">
+        Want to go back?
+        <a href="adminfeatures.html">Admin Login</a>
+    </p>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+<script src="scripts/productform.js" defer></script>
 </body>
 </html>

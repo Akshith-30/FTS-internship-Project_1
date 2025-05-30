@@ -13,15 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.getElementById('overlay');
 
   // Configuration
-  const API_BASE_URL = 'http://localhost:5555/api/product'; // Primary endpoint from first snippet
-  const FALLBACK_API_URL = '/api/products'; // Fallback endpoint from second snippet
+  const API_BASE_URL = 'http://localhost:5555/api/product';
+  const FALLBACK_API_URL = '/api/products';
 
-  // State Variables
+  // State
   let cart = JSON.parse(localStorage.getItem('cart')) || {};
   let products = [];
   let productsLoaded = false;
 
-  // ===== PRODUCT FETCHING WITH CATEGORY SUPPORT =====
   async function fetchProducts(category = "all") {
     try {
       let url = API_BASE_URL;
@@ -45,20 +44,20 @@ document.addEventListener('DOMContentLoaded', () => {
       productsLoaded = true;
 
       displayProducts(products);
-      renderCartItems(); // Update cart display with new product data
+      renderCartItems();
       updateCartCount();
       updateCartTotal();
 
     } catch (error) {
       console.error('Error fetching products:', error);
       productsLoaded = false;
-      productList.innerHTML = `<p>Error loading products: ${error.message}</p>`;
-      cartItemsDiv.innerHTML = '<p>Failed to load cart.</p>';
+      if (productList) productList.innerHTML = `<p>Error loading products: ${error.message}</p>`;
+      if (cartItemsDiv) cartItemsDiv.innerHTML = '<p>Failed to load cart.</p>';
     }
   }
 
-  // ===== PRODUCT DISPLAY =====
   function displayProducts(filteredProducts) {
+    if (!productList) return;
     productList.innerHTML = "";
 
     if (filteredProducts.length === 0) {
@@ -70,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const productCard = document.createElement("div");
       productCard.className = "product-card";
       productCard.innerHTML = `
-        <img src="${product.image && product.image.trim() !== '' ? product.image : 'images/default.jpg'}"
+        <img src="${product.imagePath || product.image || 'images/default.jpg'}"
              alt="${product.name}"
              onerror="this.onerror=null;this.src='images/default.jpg';" />
         <h3>${product.name}</h3>
@@ -81,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
       productList.appendChild(productCard);
     });
 
-    // Add event listeners for Add to Cart buttons
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
       button.addEventListener('click', (e) => {
         const id = e.target.getAttribute('data-id');
@@ -90,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== CART FUNCTIONALITY =====
   function updateCartCount() {
     const totalItems = Object.values(cart).reduce((acc, qty) => acc + qty, 0);
     if (cartCount) cartCount.textContent = totalItems;
@@ -128,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function changeQty(productId, delta) {
     productId = String(productId);
     if (!cart[productId]) return;
-
     cart[productId] += delta;
     if (cart[productId] <= 0) {
       removeFromCart(productId);
@@ -145,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCartItems();
   }
 
-  // ===== CART UI =====
   function openCart() {
     if (!productsLoaded) {
       if (cartItemsDiv) cartItemsDiv.innerHTML = '<p>Loading cart...</p>';
@@ -153,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       renderCartItems();
     }
-
     if (overlay) overlay.style.display = "block";
     if (cartPanel) {
       cartPanel.style.right = "0";
@@ -200,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
       item.innerHTML = `
         <div class="cart-item-info">
           <div class="cart-item-name">${product.name}</div>
-          <div class="cart-item-price">$${product.price.toFixed(2)} x ${qty} = $${(product.price * qty).toFixed(2)}</div>
+          <div class="cart-item-price">$${Number(product.price).toFixed(2)} x ${qty} = $${(product.price * qty).toFixed(2)}</div>
         </div>
         <div class="cart-item-quantity">
           <button class="quantity-btn qty-decrease" data-id="${productId}">-</button>
@@ -212,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
       cartItemsDiv.appendChild(item);
     });
 
-    // Add event listeners for quantity controls
     document.querySelectorAll('.qty-increase').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = e.target.getAttribute('data-id');
@@ -237,9 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartTotal();
   }
 
-  // ===== EVENT LISTENERS =====
-
-  // Category filter (from first snippet)
+  // Category filter support
   if (categoryFilter) {
     categoryFilter.addEventListener("change", () => {
       const selectedCategory = categoryFilter.value;
@@ -264,12 +255,10 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Your cart is empty.');
         return;
       }
-      // Add checkout logic here
-      console.log('Proceeding to checkout with cart:', cart);
+      window.location.href = "checkout.html";
     });
   }
 
-  // ===== INITIALIZATION =====
   // Initial fetch on page load
   fetchProducts("all");
 });
