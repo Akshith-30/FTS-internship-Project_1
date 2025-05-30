@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
@@ -15,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
     private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @PostMapping
     public ResponseEntity<String> saveProduct(@RequestBody Product product) {
@@ -57,4 +64,24 @@ public class ProductController {
                     .body("Failed to delete product: " + e.getMessage());
         }
     }
+    @GetMapping
+    public ResponseEntity<List<Product>> getAllProducts(
+            @RequestParam(value = "category", required = false) String category) {
+        try {
+            List<Product> products;
+            if (category == null || category.equalsIgnoreCase("all")) {
+                products = productService.getAllProducts();
+            } else {
+                products = productService.getProductsByCategory(category);
+            }
+            return ResponseEntity.ok(products);
+        } catch (Exception e) {
+            // Log the exception (optional)
+            // logger.error("Error fetching products", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.emptyList());
+        }
+    }
+
 }
+

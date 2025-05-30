@@ -23,6 +23,8 @@ public class Product {
     private String description;
     private BigDecimal price;
     private Integer stock;
+    private String image;
+    private String category;
 
 
 }

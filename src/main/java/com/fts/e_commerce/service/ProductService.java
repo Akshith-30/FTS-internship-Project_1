@@ -5,11 +5,17 @@ import com.fts.e_commerce.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public void saveProduct(Product product) {
         productRepository.save(product);
@@ -33,4 +39,12 @@ public class ProductService {
         }
         productRepository.deleteById(id);
     }
+    public List<Product> getProductsByCategory(String category) {
+        return productRepository.findByCategory(category);
+    }
+
+    public List<Product> getAllProducts() {
+        return null;
+    }
 }
+
