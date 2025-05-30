@@ -127,4 +127,10 @@ public class ProductController {
                     .body("Failed to delete product: " + e.getMessage());
         }
     }
+    @GetMapping("/categories")
+    public ResponseEntity<List<String>> getCategories() {
+        List<String> categories = productService.getAllDistinctCategories();
+        return ResponseEntity.ok(categories);
+    }
+
 }

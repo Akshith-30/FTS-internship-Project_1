@@ -201,3 +201,27 @@ select option {
     text-decoration: underline;
     text-decoration-color: black;
 }
+.input-box select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 12px 12px 12px 45px;
+    border-radius: 8px;
+    outline: 3px solid transparent;
+    transition: 0.3s;
+    font-size: 17px;
+    color: white;
+    font-weight: 600;
+    appearance: none;
+    cursor: pointer;
+}
+
+.input-box select:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.input-box select option {
+    color: #000;
+    font-weight: 500;
+    background-color: #f1f1f1;
+}

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // DOM Elements
   const productList = document.getElementById('product-list');
   const categoryFilter = document.getElementById('categoryFilter');
   const cartCount = document.getElementById('cartCount');
@@ -12,11 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const clearCartBtn = document.getElementById('clearCartBtn');
   const overlay = document.getElementById('overlay');
 
-  // Configuration
   const API_BASE_URL = 'http://localhost:5555/api/product';
   const FALLBACK_API_URL = '/api/products';
 
-  // State
   let cart = JSON.parse(localStorage.getItem('cart')) || {};
   let products = [];
   let productsLoaded = false;
@@ -32,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         response = await fetch(url);
       } catch (error) {
-        // Fallback to secondary endpoint
         console.warn('Primary API failed, trying fallback:', error);
         response = await fetch(FALLBACK_API_URL);
       }
@@ -47,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
       renderCartItems();
       updateCartCount();
       updateCartTotal();
-
     } catch (error) {
       console.error('Error fetching products:', error);
       productsLoaded = false;
@@ -230,7 +225,34 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartTotal();
   }
 
-  // Category filter support
+  async function populateCategoryFilter() {
+    try {
+      const res = await fetch('http://localhost:5555/api/product/categories');
+      if (!res.ok) throw new Error("Failed to fetch categories");
+
+      const categories = await res.json();
+      const filter = document.getElementById('categoryFilter');
+
+      filter.innerHTML = '';
+
+      const allOption = document.createElement('option');
+      allOption.value = 'all';
+      allOption.textContent = 'All';
+      filter.appendChild(allOption);
+
+      categories.forEach(cat => {
+        if (!cat) return; // ✅ Skip null or empty categories
+
+        const option = document.createElement('option');
+        option.value = cat.toLowerCase();
+        option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+        filter.appendChild(option);
+      });
+    } catch (err) {
+      console.error("Could not populate category filter:", err);
+    }
+  }
+
   if (categoryFilter) {
     categoryFilter.addEventListener("change", () => {
       const selectedCategory = categoryFilter.value;
@@ -238,17 +260,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Cart controls
   if (cartBtn) cartBtn.addEventListener('click', openCart);
   if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
   if (overlay) overlay.addEventListener('click', closeCart);
-
-  // Clear cart button
-  if (clearCartBtn) {
-    clearCartBtn.addEventListener('click', clearCart);
-  }
-
-  // Checkout button
+  if (clearCartBtn) clearCartBtn.addEventListener('click', clearCart);
   if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
       if (Object.keys(cart).length === 0) {
@@ -259,6 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initial fetch on page load
+  populateCategoryFilter();
   fetchProducts("all");
 });

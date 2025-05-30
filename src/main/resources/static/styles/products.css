@@ -88,7 +88,15 @@ h1 {
   flex-direction: column;
   justify-content: space-between;
   color: #d1d1d1;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 320px;
+  }
+
+  .product-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  }
+
 }
 
 .product-card:hover {
@@ -112,6 +120,15 @@ h1 {
   color: #ccc;
   min-height: 40px;
 }
+.product-card img {
+  width: 100%;
+  height: 200px; /* or consistent height you prefer */
+  object-fit: cover;
+  display: block;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+}
+
 
 .price,
 .product-price {

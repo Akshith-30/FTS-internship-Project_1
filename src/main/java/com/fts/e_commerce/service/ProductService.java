@@ -17,13 +17,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
+
     private final ProductRepository productRepository;
 
-    // Save product without image (JSON-based)
+    // Save product via JSON (without image upload)
     public void saveProduct(Product product) {
         productRepository.save(product);
     }
 
+    // Save product with uploaded image
     public void saveProductWithImage(
             String name,
             String description,
@@ -44,20 +46,28 @@ public class ProductService {
         product.setPrice(price);
         product.setStock(stock);
         product.setCategory(category);
-        product.setImage(fileName); // legacy field
-        product.setImagePath("/product-images/" + fileName); // for web access
+        product.setImage(fileName); // Legacy field (can be used for filename tracking)
+        product.setImagePath("/product-images/" + fileName); // For frontend access
 
         productRepository.save(product);
     }
 
+    // Get all products
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
+    // Get products by category
     public List<Product> getProductsByCategory(String category) {
         return productRepository.findByCategoryIgnoreCase(category);
     }
 
+    // Get distinct category names (for dropdown)
+    public List<String> getAllDistinctCategories() {
+        return productRepository.findDistinctCategories();
+    }
+
+    // Update an existing product
     public void updateProduct(Long id, Product updatedProduct) {
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
@@ -73,6 +83,7 @@ public class ProductService {
         productRepository.save(existingProduct);
     }
 
+    // Delete product by ID
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {
             throw new RuntimeException("Product not found");
