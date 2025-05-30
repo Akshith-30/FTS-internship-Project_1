@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -24,6 +25,8 @@ public class ProductService {
         existingProduct.setPrice(updatedProduct.getPrice());
         existingProduct.setStock(updatedProduct.getStock());
         existingProduct.setDescription(updatedProduct.getDescription());
+        existingProduct.setImage(updatedProduct.getImage());
+        existingProduct.setCategory(updatedProduct.getCategory());
 
         productRepository.save(existingProduct);
     }
@@ -34,12 +37,12 @@ public class ProductService {
         }
         productRepository.deleteById(id);
     }
+
     public List<Product> getProductsByCategory(String category) {
-        return productRepository.findByCategory(category);
+        return productRepository.findByCategoryIgnoreCase(category);
     }
 
     public List<Product> getAllProducts() {
-        return null;
+        return productRepository.findAll();
     }
 }
-

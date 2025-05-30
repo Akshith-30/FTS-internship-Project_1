@@ -1,6 +1,6 @@
 const productList = document.getElementById("product-list");
 const categoryFilter = document.getElementById("categoryFilter");
-const API_BASE_URL = "/api/products"; // Adjust if your backend runs elsewhere
+const API_BASE_URL = 'http://localhost:5555/api/product'; // Correct endpoint
 
 let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -36,7 +36,7 @@ function displayProducts(filteredProducts) {
         const productCard = document.createElement("div");
         productCard.className = "product-card";
         productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" />
+            <img src="${product.image && product.image.trim() !== '' ? product.image : 'images/default.jpg'}" alt="${product.name}" onerror="this.onerror=null;this.src='images/default.jpg';" />
             <h3>${product.name}</h3>
             <p>$${Number(product.price).toFixed(2)}</p>
             <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
@@ -65,7 +65,7 @@ window.addEventListener("DOMContentLoaded", () => {
     updateCartUI();
 });
 
-// Cart logic
+// Cart logic unchanged...
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     if (product) {

@@ -1,6 +1,12 @@
-async function loadProducts() {
+const API_BASE_URL = 'http://localhost:5555/api/product'; // Singular
+
+async function loadProducts(category = 'all') {
     try {
-        const response = await fetch('http://localhost:5555/api/products');
+        let url = API_BASE_URL;
+        if (category && category !== 'all') {
+            url += `?category=${encodeURIComponent(category)}`;
+        }
+        const response = await fetch(url);
         if (!response.ok) throw new Error('Network response was not ok');
         const products = await response.json();
 
@@ -12,8 +18,9 @@ async function loadProducts() {
             row.innerHTML = `
                 <td>${product.name}</td>
                 <td>${product.description}</td>
-                <td class="price-cell">${product.price.toFixed(2)}</td>
+                <td class="price-cell">${Number(product.price).toFixed(2)}</td>
                 <td>${product.stock}</td>
+                <td>${product.category}</td>
                 <td><button class="remove-btn">Remove</button></td>
                 <td><button class="change-price-btn">Change Price</button></td>
             `;
@@ -22,7 +29,7 @@ async function loadProducts() {
             row.querySelector('.remove-btn').addEventListener('click', async () => {
                 if (confirm(`Are you sure you want to remove "${product.name}"?`)) {
                     try {
-                        const deleteRes = await fetch(`http://localhost:5555/api/product/${product.id}`, {
+                        const deleteRes = await fetch(`http://localhost:5555/api/product/${product.id}`, { // Singular
                             method: 'DELETE'
                         });
 
@@ -40,7 +47,7 @@ async function loadProducts() {
                 const newPrice = prompt(`Enter new price for "${product.name}"`, product.price);
                 if (newPrice !== null && !isNaN(parseFloat(newPrice))) {
                     try {
-                        const updateRes = await fetch(`http://localhost:5555/api/product/${product.id}`, {
+                        const updateRes = await fetch(`http://localhost:5555/api/product/${product.id}`, { // Singular
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -74,5 +81,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('addProductBtn').addEventListener('click', () => {
         window.location.href = 'productform.html';
+    });
+
+    // Category filter event
+    document.getElementById('categoryFilter').addEventListener('change', (e) => {
+        loadProducts(e.target.value);
     });
 });

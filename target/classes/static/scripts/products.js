@@ -1,211 +1,126 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const productList = document.getElementById('product-list');
-  const cartCount = document.getElementById('cartCount');
-  const cartBtn = document.getElementById('cartBtn');
-  const cartPanel = document.getElementById('cartPanel');
-  const closeCartBtn = document.getElementById('closeCartBtn');
-  const cartItemsDiv = document.getElementById('cartItems');
-  const cartTotal = document.getElementById('cartTotal');
-  const checkoutBtn = document.getElementById('checkoutBtn');
-  const overlay = document.getElementById('overlay');
+const productList = document.getElementById("product-list");
+const categoryFilter = document.getElementById("categoryFilter");
+const API_BASE_URL = 'http://localhost:5555/api/product'; // Correct endpoint
 
-  let cart = JSON.parse(localStorage.getItem('cart')) || {};
-  let products = [];
-  let productsLoaded = false;
+let products = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  function updateCartCount() {
-    const totalItems = Object.values(cart).reduce((acc, qty) => acc + qty, 0);
-    cartCount.textContent = totalItems;
-  }
-
-  function updateCartTotal() {
-    const total = Object.entries(cart).reduce((acc, [productId, qty]) => {
-      const product = products.find(p => String(p.id) === productId);
-      return acc + (product ? product.price * qty : 0);
-    }, 0);
-    cartTotal.textContent = total.toFixed(2);
-  }
-
-  function saveCart() {
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    updateCartTotal();
-  }
-
-  function openCart() {
-    if (!productsLoaded) {
-      cartItemsDiv.innerHTML = '<p>Loading cart...</p>';
-      cartTotal.textContent = '0.00';
-      cartPanel.classList.add('open');
-      overlay.classList.add('active');
-      return;
+// Fetch products from backend, optionally by category
+function fetchProducts(category = "all") {
+    let url = API_BASE_URL;
+    if (category !== "all") {
+        url += `?category=${encodeURIComponent(category)}`;
     }
-    renderCartItems();
-    cartPanel.classList.add('open');
-    overlay.classList.add('active');
-  }
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to fetch products");
+            return response.json();
+        })
+        .then(fetchedProducts => {
+            products = fetchedProducts;
+            displayProducts(products);
+        })
+        .catch(error => {
+            productList.innerHTML = `<p>Error loading products: ${error.message}</p>`;
+        });
+}
 
-  function closeCart() {
-    cartPanel.classList.remove('open');
-    overlay.classList.remove('active');
-  }
-
-  function addToCart(productId) {
-    productId = String(productId);
-    cart[productId] = (cart[productId] || 0) + 1;
-    saveCart();
-    renderCartItems();
-    openCart();
-  }
-
-  function removeFromCart(productId) {
-    productId = String(productId);
-    delete cart[productId];
-    saveCart();
-    renderCartItems();
-  }
-
-  function changeQty(productId, delta) {
-    productId = String(productId);
-    if (!cart[productId]) return;
-    cart[productId] += delta;
-    if (cart[productId] <= 0) {
-      removeFromCart(productId);
-    } else {
-      saveCart();
-      renderCartItems();
-    }
-  }
-
-  function renderProducts() {
-    productList.innerHTML = '';
-    products.forEach(product => {
-      const card = document.createElement('div');
-      card.className = 'product-card';
-      card.innerHTML = `
-        <h2>${product.name}</h2>
-        <p>${product.description}</p>
-        <div class="price">$${product.price.toFixed(2)}</div>
-        <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
-      `;
-      productList.appendChild(card);
-    });
-
-    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-      button.addEventListener('click', (e) => {
-        const id = e.target.getAttribute('data-id');
-        addToCart(id);
-      });
-    });
-  }
-
-  function renderCartItems() {
-    cartItemsDiv.innerHTML = '';
-
-    if (!productsLoaded) {
-      cartItemsDiv.innerHTML = '<p>Loading cart...</p>';
-      cartTotal.textContent = '0.00';
-      return;
-    }
-
-    if (Object.keys(cart).length === 0) {
-      cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
-      updateCartTotal();
-      return;
-    }
-
-    Object.entries(cart).forEach(([productId, qty]) => {
-      const product = products.find(p => String(p.id) === productId);
-      if (!product) {
-        console.warn('Product not found for ID:', productId);
+// Display products in the grid
+function displayProducts(filteredProducts) {
+    productList.innerHTML = "";
+    if (filteredProducts.length === 0) {
+        productList.innerHTML = "<p>No products available in this category.</p>";
         return;
-      }
-
-      const item = document.createElement('div');
-      item.className = 'cart-item';
-      item.innerHTML = `
-        <div class="cart-item-info">
-          <div class="cart-item-name">${product.name}</div>
-          <div class="cart-item-price">$${product.price.toFixed(2)} x ${qty} = $${(product.price * qty).toFixed(2)}</div>
-        </div>
-        <div class="cart-item-quantity">
-          <button class="quantity-btn qty-decrease" data-id="${productId}">-</button>
-          <span class="quantity-value">${qty}</span>
-          <button class="quantity-btn qty-increase" data-id="${productId}">+</button>
-          <button class="remove-item-btn" data-id="${productId}" title="Remove item">&times;</button>
-        </div>
-      `;
-      cartItemsDiv.appendChild(item);
-    });
-
-    document.querySelectorAll('.qty-increase').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = e.target.getAttribute('data-id');
-        changeQty(id, 1);
-      });
-    });
-
-    document.querySelectorAll('.qty-decrease').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = e.target.getAttribute('data-id');
-        changeQty(id, -1);
-      });
-    });
-
-    document.querySelectorAll('.remove-item-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = e.target.getAttribute('data-id');
-        removeFromCart(id);
-      });
-    });
-
-    updateCartTotal();
-  }
-
-  // Event Listeners
-  cartBtn.addEventListener('click', openCart);
-  closeCartBtn.addEventListener('click', closeCart);
-  overlay.addEventListener('click', closeCart);
-
-  checkoutBtn.addEventListener('click', () => {
-    if (Object.keys(cart).length === 0) {
-      alert('Your cart is empty.');
-      return;
     }
-  });
-
-  // Add clear cart button functionality here:
-  const clearCartBtn = document.getElementById('clearCartBtn');
-  if (clearCartBtn) {
-    clearCartBtn.addEventListener('click', function () {
-      cart = {};                  // Clear cart in memory
-      localStorage.removeItem('cart');  // Clear from localStorage
-      renderCartItems();          // Update the UI
-      updateCartCount();          // Update count display
-      updateCartTotal();          // Update total display
+    filteredProducts.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.className = "product-card";
+        productCard.innerHTML = `
+            <img src="${product.image && product.image.trim() !== '' ? product.image : 'images/default.jpg'}" alt="${product.name}" onerror="this.onerror=null;this.src='images/default.jpg';" />
+            <h3>${product.name}</h3>
+            <p>$${Number(product.price).toFixed(2)}</p>
+            <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+        `;
+        productList.appendChild(productCard);
     });
-  }
 
-  // Fetch products dynamically
-  async function fetchProducts() {
-    try {
-      const response = await fetch('/api/products');
-      if (!response.ok) throw new Error('Failed to fetch products');
-      products = await response.json();
+    // Add event listeners for Add to Cart buttons
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const id = Number(e.target.getAttribute('data-id'));
+            addToCart(id);
+        });
+    });
+}
 
-      console.log("Fetched products:", products);
+// Category filter event
+categoryFilter.addEventListener("change", () => {
+    const selectedCategory = categoryFilter.value;
+    fetchProducts(selectedCategory);
+});
 
-      productsLoaded = true;
-      renderProducts();
-      renderCartItems();
-      updateCartCount();
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      productsLoaded = false;
-      productList.innerHTML = '<p>Failed to load products.</p>';
-      cartItemsDiv.innerHTML = '<p>Failed to load cart.</p>';
+// Initial fetch on page load
+window.addEventListener("DOMContentLoaded", () => {
+    fetchProducts("all");
+    updateCartUI();
+});
+
+// Cart logic unchanged...
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        cart.push(product);
+        saveCart();
+        updateCartUI();
     }
-  }
+}
 
-  fetchProducts();
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
+    updateCartUI();
+}
+
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateCartUI() {
+    const cartItemsContainer = document.getElementById("cartItems");
+    const cartCount = document.getElementById("cartCount");
+    const cartTotal = document.getElementById("cartTotal");
+    cartItemsContainer.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+        itemDiv.innerHTML = `
+            <p>${item.name} - $${Number(item.price).toFixed(2)}</p>
+            <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        total += Number(item.price);
+        cartItemsContainer.appendChild(itemDiv);
+    });
+
+    cartCount.textContent = cart.length;
+    cartTotal.textContent = total.toFixed(2);
+}
+
+// Clear cart button
+document.getElementById("clearCartBtn").addEventListener("click", () => {
+    cart = [];
+    saveCart();
+    updateCartUI();
+});
+
+// Cart open/close logic
+document.getElementById("cartBtn").addEventListener("click", () => {
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("cartPanel").style.right = "0";
+});
+
+document.getElementById("closeCartBtn").addEventListener("click", () => {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("cartPanel").style.right = "-100%";
 });

@@ -60,6 +60,7 @@ public class ProductController {
                     .body("Failed to delete product: " + e.getMessage());
         }
     }
+
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts(
             @RequestParam(value = "category", required = false) String category) {
@@ -68,16 +69,13 @@ public class ProductController {
             if (category == null || category.equalsIgnoreCase("all")) {
                 products = productService.getAllProducts();
             } else {
-                products = productService.getProductsByCategory(category);
+                products = productService.getProductsByCategory(category.trim());
             }
             return ResponseEntity.ok(products);
         } catch (Exception e) {
-            // Log the exception (optional)
-            // logger.error("Error fetching products", e);
+            log.error("Error fetching products", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Collections.emptyList());
         }
     }
-
 }
-

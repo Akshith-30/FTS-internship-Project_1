@@ -59,31 +59,27 @@ button.action-btn:hover {
     color: #fff;
     transform: scale(1.05);
 }
-
-/* Categories filter buttons with same styles as action-btn */
-button.category-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: #d1d1d1;
-    padding: 12px 20px;
-    font-weight: 600;
-    font-size: 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    margin: 10px 5px;
-    width: auto;
-    text-align: center;
-}
-
-button.category-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.6);
+button.category-btn, .action-btn {
+    background: #333; /* Dark background */
     color: #fff;
-    transform: scale(1.05);
+    border: 2px solid #555; /* Subtle border */
+    border-radius: 10px;
+    padding: 8px 16px;      /* Reduced padding */
+    font-size: 14px;        /* Reduced font size */
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+    outline: none;
 }
+
+button.category-btn:hover, .action-btn:hover {
+    background: #444;
+    border-color: #888;
+    color: #fff;
+    transform: scale(1.04);
+}
+
 
 button.remove-btn {
     background-color: #dc3545;

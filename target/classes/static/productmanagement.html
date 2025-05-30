@@ -12,6 +12,16 @@
 <h1>Product Management</h1>
 <button id="addProductBtn" class="action-btn">Add Products</button>
 
+<!-- Category Filter Dropdown -->
+<label for="categoryFilter">Filter by Category:</label>
+<select id="categoryFilter" class="action-btn">
+    <option value="all">All</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Fashion">Clothing</option>
+    <option value="Books">Books</option>
+    <!-- Add more categories as needed -->
+</select>
+
 <table id="productsTable">
     <thead>
     <tr>
@@ -19,6 +29,7 @@
         <th>Description</th>
         <th>Price ($)</th>
         <th>Stock</th>
+        <th>Category</th>
         <th>Remove Product</th>
         <th>Change Pricing</th>
     </tr>

@@ -1,4 +1,5 @@
-const API_BASE_URL = 'http://localhost:5555/api/products';
+const API_BASE_URL = 'http://localhost:5555/api/product'; // Singular
+
 async function loadProducts(category = 'all') {
     try {
         let url = API_BASE_URL;
@@ -17,7 +18,7 @@ async function loadProducts(category = 'all') {
             row.innerHTML = `
                 <td>${product.name}</td>
                 <td>${product.description}</td>
-                <td class="price-cell">${product.price.toFixed(2)}</td>
+                <td class="price-cell">${Number(product.price).toFixed(2)}</td>
                 <td>${product.stock}</td>
                 <td>${product.category}</td>
                 <td><button class="remove-btn">Remove</button></td>
@@ -28,7 +29,7 @@ async function loadProducts(category = 'all') {
             row.querySelector('.remove-btn').addEventListener('click', async () => {
                 if (confirm(`Are you sure you want to remove "${product.name}"?`)) {
                     try {
-                        const deleteRes = await fetch(`http://localhost:5555/api/products/${product.id}`, {
+                        const deleteRes = await fetch(`http://localhost:5555/api/product/${product.id}`, { // Singular
                             method: 'DELETE'
                         });
 
@@ -46,7 +47,7 @@ async function loadProducts(category = 'all') {
                 const newPrice = prompt(`Enter new price for "${product.name}"`, product.price);
                 if (newPrice !== null && !isNaN(parseFloat(newPrice))) {
                     try {
-                        const updateRes = await fetch(`http://localhost:5555/api/products/${product.id}`, {
+                        const updateRes = await fetch(`http://localhost:5555/api/product/${product.id}`, { // Singular
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
