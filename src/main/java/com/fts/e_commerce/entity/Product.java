@@ -10,19 +10,19 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "t_ecom_products")
-@Setter
 @Getter
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String description;
     private BigDecimal price;
     private Integer stock;
-
-
+    private String image;
+    private String imagePath;
+    private String category;
 }

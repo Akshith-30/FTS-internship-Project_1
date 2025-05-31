@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const productList = document.getElementById('product-list');
+  const categoryFilter = document.getElementById('categoryFilter');
   const cartCount = document.getElementById('cartCount');
   const cartBtn = document.getElementById('cartBtn');
   const cartPanel = document.getElementById('cartPanel');
@@ -7,15 +8,84 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartItemsDiv = document.getElementById('cartItems');
   const cartTotal = document.getElementById('cartTotal');
   const checkoutBtn = document.getElementById('checkoutBtn');
+  const clearCartBtn = document.getElementById('clearCartBtn');
   const overlay = document.getElementById('overlay');
+
+  const API_BASE_URL = 'http://localhost:5555/api/product';
+  const FALLBACK_API_URL = '/api/products';
 
   let cart = JSON.parse(localStorage.getItem('cart')) || {};
   let products = [];
   let productsLoaded = false;
 
+  async function fetchProducts(category = "all") {
+    try {
+      let url = API_BASE_URL;
+      if (category !== "all") {
+        url += `?category=${encodeURIComponent(category)}`;
+      }
+
+      let response;
+      try {
+        response = await fetch(url);
+      } catch (error) {
+        console.warn('Primary API failed, trying fallback:', error);
+        response = await fetch(FALLBACK_API_URL);
+      }
+
+      if (!response.ok) throw new Error("Failed to fetch products");
+
+      const fetchedProducts = await response.json();
+      products = fetchedProducts;
+      productsLoaded = true;
+
+      displayProducts(products);
+      renderCartItems();
+      updateCartCount();
+      updateCartTotal();
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      productsLoaded = false;
+      if (productList) productList.innerHTML = `<p>Error loading products: ${error.message}</p>`;
+      if (cartItemsDiv) cartItemsDiv.innerHTML = '<p>Failed to load cart.</p>';
+    }
+  }
+
+  function displayProducts(filteredProducts) {
+    if (!productList) return;
+    productList.innerHTML = "";
+
+    if (filteredProducts.length === 0) {
+      productList.innerHTML = "<p>No products available in this category.</p>";
+      return;
+    }
+
+    filteredProducts.forEach(product => {
+      const productCard = document.createElement("div");
+      productCard.className = "product-card";
+      productCard.innerHTML = `
+        <img src="${product.imagePath || product.image || 'images/default.jpg'}"
+             alt="${product.name}"
+             onerror="this.onerror=null;this.src='images/default.jpg';" />
+        <h3>${product.name}</h3>
+        <p class="description">${product.description || ''}</p>
+        <div class="price">$${Number(product.price).toFixed(2)}</div>
+        <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+      `;
+      productList.appendChild(productCard);
+    });
+
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-id');
+        addToCart(id);
+      });
+    });
+  }
+
   function updateCartCount() {
     const totalItems = Object.values(cart).reduce((acc, qty) => acc + qty, 0);
-    cartCount.textContent = totalItems;
+    if (cartCount) cartCount.textContent = totalItems;
   }
 
   function updateCartTotal() {
@@ -23,31 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const product = products.find(p => String(p.id) === productId);
       return acc + (product ? product.price * qty : 0);
     }, 0);
-    cartTotal.textContent = total.toFixed(2);
+    if (cartTotal) cartTotal.textContent = total.toFixed(2);
   }
 
   function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     updateCartTotal();
-  }
-
-  function openCart() {
-    if (!productsLoaded) {
-      cartItemsDiv.innerHTML = '<p>Loading cart...</p>';
-      cartTotal.textContent = '0.00';
-      cartPanel.classList.add('open');
-      overlay.classList.add('active');
-      return;
-    }
-    renderCartItems();
-    cartPanel.classList.add('open');
-    overlay.classList.add('active');
-  }
-
-  function closeCart() {
-    cartPanel.classList.remove('open');
-    overlay.classList.remove('active');
   }
 
   function addToCart(productId) {
@@ -77,34 +129,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function renderProducts() {
-    productList.innerHTML = '';
-    products.forEach(product => {
-      const card = document.createElement('div');
-      card.className = 'product-card';
-      card.innerHTML = `
-        <h2>${product.name}</h2>
-        <p>${product.description}</p>
-        <div class="price">$${product.price.toFixed(2)}</div>
-        <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
-      `;
-      productList.appendChild(card);
-    });
+  function clearCart() {
+    cart = {};
+    localStorage.removeItem('cart');
+    saveCart();
+    renderCartItems();
+  }
 
-    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-      button.addEventListener('click', (e) => {
-        const id = e.target.getAttribute('data-id');
-        addToCart(id);
-      });
-    });
+  function openCart() {
+    if (!productsLoaded) {
+      if (cartItemsDiv) cartItemsDiv.innerHTML = '<p>Loading cart...</p>';
+      if (cartTotal) cartTotal.textContent = '0.00';
+    } else {
+      renderCartItems();
+    }
+    if (overlay) overlay.style.display = "block";
+    if (cartPanel) {
+      cartPanel.style.right = "0";
+      cartPanel.classList.add('open');
+    }
+    if (overlay) overlay.classList.add('active');
+  }
+
+  function closeCart() {
+    if (overlay) overlay.style.display = "none";
+    if (cartPanel) {
+      cartPanel.style.right = "-100%";
+      cartPanel.classList.remove('open');
+    }
+    if (overlay) overlay.classList.remove('active');
   }
 
   function renderCartItems() {
+    if (!cartItemsDiv) return;
+
     cartItemsDiv.innerHTML = '';
 
     if (!productsLoaded) {
       cartItemsDiv.innerHTML = '<p>Loading cart...</p>';
-      cartTotal.textContent = '0.00';
+      if (cartTotal) cartTotal.textContent = '0.00';
       return;
     }
 
@@ -126,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
       item.innerHTML = `
         <div class="cart-item-info">
           <div class="cart-item-name">${product.name}</div>
-          <div class="cart-item-price">$${product.price.toFixed(2)} x ${qty} = $${(product.price * qty).toFixed(2)}</div>
+          <div class="cart-item-price">$${Number(product.price).toFixed(2)} x ${qty} = $${(product.price * qty).toFixed(2)}</div>
         </div>
         <div class="cart-item-quantity">
           <button class="quantity-btn qty-decrease" data-id="${productId}">-</button>
@@ -162,50 +225,55 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartTotal();
   }
 
-  // Event Listeners
-  cartBtn.addEventListener('click', openCart);
-  closeCartBtn.addEventListener('click', closeCart);
-  overlay.addEventListener('click', closeCart);
+  async function populateCategoryFilter() {
+    try {
+      const res = await fetch('http://localhost:5555/api/product/categories');
+      if (!res.ok) throw new Error("Failed to fetch categories");
 
-  checkoutBtn.addEventListener('click', () => {
-    if (Object.keys(cart).length === 0) {
-      alert('Your cart is empty.');
-      return;
+      const categories = await res.json();
+      const filter = document.getElementById('categoryFilter');
+
+      filter.innerHTML = '';
+
+      const allOption = document.createElement('option');
+      allOption.value = 'all';
+      allOption.textContent = 'All';
+      filter.appendChild(allOption);
+
+      categories.forEach(cat => {
+        if (!cat) return; // ✅ Skip null or empty categories
+
+        const option = document.createElement('option');
+        option.value = cat.toLowerCase();
+        option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+        filter.appendChild(option);
+      });
+    } catch (err) {
+      console.error("Could not populate category filter:", err);
     }
-  });
+  }
 
-  // Add clear cart button functionality here:
-  const clearCartBtn = document.getElementById('clearCartBtn');
-  if (clearCartBtn) {
-    clearCartBtn.addEventListener('click', function () {
-      cart = {};                  // Clear cart in memory
-      localStorage.removeItem('cart');  // Clear from localStorage
-      renderCartItems();          // Update the UI
-      updateCartCount();          // Update count display
-      updateCartTotal();          // Update total display
+  if (categoryFilter) {
+    categoryFilter.addEventListener("change", () => {
+      const selectedCategory = categoryFilter.value;
+      fetchProducts(selectedCategory);
     });
   }
 
-  // Fetch products dynamically
-  async function fetchProducts() {
-    try {
-      const response = await fetch('/api/products');
-      if (!response.ok) throw new Error('Failed to fetch products');
-      products = await response.json();
-
-      console.log("Fetched products:", products);
-
-      productsLoaded = true;
-      renderProducts();
-      renderCartItems();
-      updateCartCount();
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      productsLoaded = false;
-      productList.innerHTML = '<p>Failed to load products.</p>';
-      cartItemsDiv.innerHTML = '<p>Failed to load cart.</p>';
-    }
+  if (cartBtn) cartBtn.addEventListener('click', openCart);
+  if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
+  if (overlay) overlay.addEventListener('click', closeCart);
+  if (clearCartBtn) clearCartBtn.addEventListener('click', clearCart);
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      if (Object.keys(cart).length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      window.location.href = "checkout.html";
+    });
   }
 
-  fetchProducts();
+  populateCategoryFilter();
+  fetchProducts("all");
 });

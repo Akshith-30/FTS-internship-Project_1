@@ -21,14 +21,27 @@
 </nav>
 
 <main>
+    <!-- Category Filter -->
+    <section class="category-filter-bar">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter" aria-label="Select Product Category">
+            <!-- Options will be dynamically populated -->
+        </select>
+
+    </section>
+
+
+    <!-- Product Grid -->
     <section id="product-list" class="products-grid" aria-label="Product List"></section>
+
+    <!-- Cart Button -->
     <button id="cartBtn" class="cart-button" aria-label="View Cart">
         <i class="bx bx-cart"></i> Cart
         <span id="cartCount" class="cart-count">0</span>
     </button>
 
+    <!-- Cart Sidebar -->
     <div id="overlay" class="overlay"></div>
-
     <aside id="cartPanel" class="cart-panel" aria-label="Shopping Cart Sidebar" role="dialog" aria-modal="true" tabindex="-1">
         <div class="cart-header">
             <h2>Your Cart</h2>
@@ -39,13 +52,11 @@
             <div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
             <button id="clearCartBtn" class="clear-cart-btn">Clear Cart</button>
             <button id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
-
             <script>
                 document.getElementById("checkoutBtn").addEventListener("click", function() {
-                  window.location.href = "checkout.html";
+                    window.location.href = "checkout.html";
                 });
             </script>
-
         </div>
     </aside>
 </main>
