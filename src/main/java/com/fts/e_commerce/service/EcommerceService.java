@@ -14,17 +14,45 @@ public class EcommerceService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Registers a new user.
+     *
+     * @param userEntity user entity to save
+     */
     public void registerUserDetails(UserEntity userEntity) {
-        // validation logic here (optional)
+        // Optional: Add validation logic here before saving
         userRepository.save(userEntity);
     }
 
+    /**
+     * Searches users by a search string on full name.
+     *
+     * @param searchString partial/full name to search for
+     * @return list of matching users
+     */
     public List<UserEntity> searchUserDetails(String searchString) {
         return userRepository.searchUserDetails(searchString);
     }
 
+    /**
+     * Retrieves a user by ID.
+     *
+     * @param id user ID
+     * @return UserEntity if found, otherwise null
+     */
     public UserEntity getUserDetailsById(Integer id) {
         Optional<UserEntity> user = userRepository.findById(Long.valueOf(id));
         return user.orElse(null);
+    }
+
+    /**
+     * Validates user login credentials.
+     *
+     * @param email user's email
+     * @param password user's password
+     * @return Optional containing UserEntity if credentials match, else empty
+     */
+    public Optional<UserEntity> validateUser(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
     }
 }

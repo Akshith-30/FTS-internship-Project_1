@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,22 +8,22 @@
     <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet" />
 </head>
-
-<body style="
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-image: url('images/bg3.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    ">
-<!-- NAVIGATION BAR -->
+<body
+        style="
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url('images/bg3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  "
+>
+<!-- Navigation Bar -->
 <nav class="navbar">
     <a href="index.html" class="logo">Franqlin</a>
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="products.html">Products</a></li>
         <li><a href="login.html">Login</a></li>
         <li><a href="register.html">Register</a></li>
     </ul>
@@ -32,39 +31,29 @@
 
 <!-- Registration Form -->
 <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
-    <form class="reg-form">
+    <form id="registrationForm" class="reg-form" method="POST" action="/api/users/register">
         <h1 class="reg-title">Registration Form</h1>
-
         <div class="input-box">
             <input type="text" placeholder="Full Name" name="fullName" required />
-            <span class="error-message" style="color:red; font-size:0.9em;"></span>
         </div>
-
         <div class="input-box">
             <input type="email" placeholder="Email" name="email" required />
-            <span class="error-message" style="color:red; font-size:0.9em;"></span>
         </div>
-
         <div class="input-box">
             <input type="password" placeholder="Password" name="password" required />
-            <span class="error-message" style="color:red; font-size:0.9em;"></span>
         </div>
-
         <div class="input-box">
             <input type="text" placeholder="Address" name="address" required />
         </div>
-
         <div class="input-box">
-            <input type="number" placeholder="Phone number" name="phone" />
+            <input type="tel" placeholder="Phone number" name="phone" pattern="[0-9]{10}" title="Enter 10-digit phone number" />
         </div>
-
         <div class="input-box">
             <input type="date" name="dob" required />
         </div>
-
         <div class="gender-row">
             <div class="input-box">
-                <select name="gender" required>
+                <select name="gender" required aria-label="Select Gender">
                     <option value="" disabled selected>Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -72,9 +61,8 @@
                 </select>
             </div>
         </div>
-
         <div class="input-box">
-            <select id="state" name="state" required>
+            <select id="state" name="state" required aria-label="Select State">
                 <option value="" disabled selected hidden>Select State</option>
                 <option value="andhra_pradesh">Andhra Pradesh</option>
                 <option value="bihar">Bihar</option>
@@ -92,12 +80,10 @@
                 <option value="west_bengal">West Bengal</option>
             </select>
         </div>
-
         <div class="button-container">
             <button type="reset" class="reset-btn">Reset</button>
             <button type="submit" class="reg-btn">Register</button>
         </div>
-
         <p class="register">
             Have an account?
             <a href="login.html">Login</a>
@@ -106,41 +92,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
-<script>
-    const inputs = document.querySelectorAll("input");
-    const selects = document.querySelectorAll("select");
-
-    inputs.forEach(input => {
-      input.addEventListener("input", () => {
-        if (input.value.trim() !== "") {
-          input.classList.add("valid");
-        } else {
-          input.classList.remove("valid");
-        }
-      });
-
-      // On load, mark pre-filled ones
-      if (input.value.trim() !== "") {
-        input.classList.add("valid");
-      }
-    });
-
-    selects.forEach(select => {
-      select.addEventListener("change", () => {
-        if (select.value !== "") {
-          select.classList.add("valid");
-        } else {
-          select.classList.remove("valid");
-        }
-      });
-
-      // On load
-      if (select.value !== "") {
-        select.classList.add("valid");
-      }
-    });
-</script>
 <script src="scripts/register.js"></script>
 </body>
-
 </html>
