@@ -19,13 +19,4 @@ public class UserProductController {
     public List<Product> getAllProducts() {
         return userProductService.getAllProducts();
     }
-
-    // Optional: Endpoint to verify if user session or login is active (for frontend usage)
-    /*
-    @GetMapping("/verify")
-    public boolean verifyUserLogin() {
-        // Implement your session/auth check here if needed
-        return true;
-    }
-    */
 }

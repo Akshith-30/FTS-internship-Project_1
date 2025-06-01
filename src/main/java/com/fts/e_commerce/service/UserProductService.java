@@ -13,11 +13,6 @@ public class UserProductService {
 
     private final ProductRepository productRepository;
 
-    /**
-     * Fetch all products available in the system.
-     *
-     * @return list of products
-     */
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
