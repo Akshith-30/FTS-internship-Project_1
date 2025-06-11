@@ -34,7 +34,7 @@ public class ProductService {
             String category,
             MultipartFile imageFile
     ) throws IOException {
-        String uploadDir = "product-images/";
+        String uploadDir = "src/main/resources/static/product-images/";
         String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
         Path filePath = Paths.get(uploadDir, fileName);
         Files.createDirectories(filePath.getParent());

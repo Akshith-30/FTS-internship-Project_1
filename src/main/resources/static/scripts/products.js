@@ -63,9 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
     filteredProducts.forEach(product => {
       const productCard = document.createElement("div");
       productCard.className = "product-card";
+
+      // Determine correct image source
+      const imageSrc = product.imagePath
+        || (product.image ? `/product-images/${product.image}` : 'images/default.jpg');
+
       productCard.innerHTML = `
-        <img src="${product.imagePath || product.image || 'images/default.jpg'}"
-             alt="${product.name}"
+        <img src="${imageSrc}" loading="lazy" alt="${product.name}"
              onerror="this.onerror=null;this.src='images/default.jpg';" />
         <h3>${product.name}</h3>
         <p class="description">${product.description || ''}</p>
@@ -241,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filter.appendChild(allOption);
 
       categories.forEach(cat => {
-        if (!cat) return; // ✅ Skip null or empty categories
+        if (!cat) return; // Skip null or empty categories
 
         const option = document.createElement('option');
         option.value = cat.toLowerCase();
